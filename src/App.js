@@ -1,26 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import { blue } from '@material-ui/core/colors';
+import Button from '@material-ui/core/Button';
+import NavBar from './components/NavBar';
+import Billboard from './components/Billboard';
+import SearchWindow from './components/SearchWindow';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#FF3D00',
+    },
+    secondary: blue
+  },
+  searchWindow: {
+    backgroundColor: 'white'
+  },
+  headings: {
+    fontFamily: 'Abril Fatface'
+  }
+});
+
+class App extends Component {
+  state = {
+    popularItems: []
+  }
+  render() {
+    return (
+      <ThemeProvider theme={theme}>
+        <NavBar />
+        <Billboard />
+        <SearchWindow/>
+        <Button color="primary">Primary</Button>
+        <Button color="secondary">Secondary</Button>
+      </ThemeProvider>
+    );
+  }
 }
-
 export default App;
