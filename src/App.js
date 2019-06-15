@@ -31,7 +31,7 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <NavBar />
         <Billboard />
-        <SearchWindow/>
+        {/* <SearchWindow/> */}
         <Button color="primary">Primary</Button>
         <Button color="secondary">Secondary</Button>
       </ThemeProvider>
