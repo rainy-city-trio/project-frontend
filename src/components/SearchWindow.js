@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
-import { Chip, Divider } from '@material-ui/core';
+import { Chip, Divider, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch } from '@material-ui/core';
 // import {deepOrange} from '@material-ui/core/colors'
 // import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 
@@ -16,10 +16,12 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         alignItems: 'center',
         width: "100%",
+        marginBottom: '2rem'
+
     },
     input: {
         // marginLeft: 8,
-        flex: 1,
+        flex: 1
     },
     iconButton: {
         padding: 10,
@@ -30,6 +32,7 @@ const useStyles = makeStyles(theme => ({
         margin: 4,
     },
     searchWindow: {
+        overflow: 'hidden',
         zIndex: 0,
         backgroundColor: 'white',
         // opacity: '.6',
@@ -52,14 +55,15 @@ const useStyles = makeStyles(theme => ({
         fontSize: '1.7rem',
         letterSpacing: '.2rem',
         color: '#272D2D',
-        marginTop: '2rem'
+        margin: '0rem'
+        // marginTop: '2rem'
     },
     secondHeading: {
         textTransform: 'uppercase',
         fontSize: '1rem',
         letterSpacing: '.2rem',
         color: '#272D2D',
-        marginTop: '2rem'
+        // marginTop: '2rem'
     },
     button: {
         textTransform: 'lowercase',
@@ -73,12 +77,38 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         width: '100%',
         // backgroundColor: 'blue',
-        justifyContent: 'flex-end'
+        justifyContent: 'space-between'
     },
     nextButton: {
-        marginTop: '1rem',
+        // marginTop: '1rem',
         marginBottom: '2rem'
-
+    },
+    steppersContainer: {
+        display: 'flex',
+        width: '3000px',
+        marginLeft: 0,
+        transition: 'margin-left 2s'
+    },
+    stepper: {
+        width: '40vw',
+        marginRight: '5vw',
+        transition: 'all .4s'
+    },
+    group: {
+        display: 'inline',
+        marginTop: '.5rem',
+        marginBottom: '1rem'
+    },
+    popular: {
+        marginTop: '1rem',
+        marginBottom: '1rem'
+    },
+    thirdHeading: {
+        textTransform: 'uppercase',
+        fontSize: '1.1rem',
+        letterSpacing: '.2rem',
+        color: '#272D2D',
+        margin: '0rem'
     }
 }));
 
@@ -92,7 +122,7 @@ const SearchWindow = (props) => {
 
     let popularRender = popularItems.filter(item => {
         return newSearch.ingredients.indexOf(item) === -1
-      });
+    });
     console.log('popularRender', popularRender)
 
     const popularItemList = popularRender.map((item, index) => {
@@ -101,33 +131,108 @@ const SearchWindow = (props) => {
         </Button>
     })
     const tagList = newSearch.ingredients.map((token, index) => {
-        return <Chip label={token} className={classes.chip} key={index} onDelete={() => {props.deleteIngredient(token)}} />
+        return <Chip label={token} className={classes.chip} key={index} onDelete={() => { props.deleteIngredient(token) }} />
     })
     return (
         <div className={classes.searchWindow}>
-            <div>
+            <div className={classes.steppersContainer}>
+                <div className={classes.stepper}>
 
+
+                    <Paper className={classes.root}>
+                        <IconButton className={classes.iconButton} aria-label="Menu">
+                            <SearchIcon />
+                        </IconButton>
+                        <InputBase
+                            onKeyUp={props.keyListener}
+                            className={classes.input}
+                            placeholder="what's in your pantry?"
+                            inputProps={{ 'aria-label': 'What\'s in your pantry?' }}
+                        />
+                        <IconButton className={classes.iconButton} aria-label="Search">
+                            <MicIcon />
+                        </IconButton>
+
+                    </Paper>
+
+                    <h1 className={classes.heading}>Popular Items</h1>
+                    <div className={classes.popular}>
+                        {popularItemList}
+
+                    </div>
+                </div>
+                <div className={classes.stepper}>
+
+
+                    <FormControl>
+                        <h1 className={classes.thirdHeading}>SPECIAL DIET</h1>
+                        <RadioGroup
+                            aria-label="special-diet"
+                            name="special-diet"
+                            className={classes.group}
+
+                        >
+                            
+                            <FormControlLabel value="Vegetarian" control={<Switch />} label="Vegetarian" />
+                            <FormControlLabel value="Vegan" control={<Switch />} label="Vegan" />
+                            <FormControlLabel value="Gluten-Free" control={<Switch />} label="Gluten-Free" />
+                            <FormControlLabel value="Dairy-Free" control={<Switch />} label="Dairy-Free" />
+                            <FormControlLabel value="Nut-Free" control={<Switch />} label="Nut-Free" />
+                        </RadioGroup>
+                        <h1 className={classes.thirdHeading}>Seasonal</h1>
+                        <RadioGroup
+                            aria-label="seasonal"
+                            name="seasonal"
+                            className={classes.group}
+
+                        >
+                            <FormControlLabel value="Winter" control={<Switch />} label="Winter" />
+                            <FormControlLabel value="Spring" control={<Switch />} label="Spring" />
+                            <FormControlLabel value="Summer" control={<Switch />} label="Summer" />
+                            <FormControlLabel value="Autumn" control={<Switch />} label="Autumn" />
+                        </RadioGroup>
+                        <h1 className={classes.thirdHeading}>Ready In...</h1>
+                        <RadioGroup
+                            aria-label="ready-in"
+                            name="ready-in"
+                            className={classes.group}
+
+                        >
+                            <FormControlLabel value="Winter" control={<Switch />} label="< 20 minutes" />
+                            <FormControlLabel value="Spring" control={<Switch />} label="20-30 minutes" />
+                            <FormControlLabel value="Summer" control={<Switch />} label="30-40 minutes" />
+                            <FormControlLabel value="Autumn" control={<Switch />} label="+40 minutes" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
+                <div className={classes.stepper}>
+
+
+                    <Paper className={classes.root}>
+                        <IconButton className={classes.iconButton} aria-label="Menu">
+                            <SearchIcon />
+                        </IconButton>
+                        <InputBase
+                            onKeyUp={props.keyListener}
+                            className={classes.input}
+                            placeholder="what's in your pantry?"
+                            inputProps={{ 'aria-label': 'What\'s in your pantry?' }}
+                        />
+                        <IconButton className={classes.iconButton} aria-label="Search">
+                            <MicIcon />
+                        </IconButton>
+
+                    </Paper>
+
+                    <h1 className={classes.heading}>Third Window</h1>
+                    {popularItemList}
+                </div>
             </div>
-            <Paper className={classes.root}>
-                <IconButton className={classes.iconButton} aria-label="Menu">
-                    <SearchIcon />
-                </IconButton>
-                <InputBase
-                    onKeyUp={props.keyListener}
-                    className={classes.input}
-                    placeholder="what's in your pantry?"
-                    inputProps={{ 'aria-label': 'What\'s in your pantry?' }}
-                />
-                <IconButton className={classes.iconButton} aria-label="Search">
-                    <MicIcon />
-                </IconButton>
 
-            </Paper>
-
-            <h1 className={classes.heading}>Popular Items</h1>
-            {popularItemList}
             <div className={classes.nextSubmit}>
-                <Button variant="contained" color="secondary" className={classes.nextButton}>NEXT</Button>
+                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.prevStep}>BACK</Button>
+
+                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.nextStep}>NEXT</Button>
             </div>
             <Divider variant="middle" />
             <h2 className={classes.secondHeading}>Your recipe will have...</h2>

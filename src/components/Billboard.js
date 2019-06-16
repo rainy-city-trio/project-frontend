@@ -36,7 +36,10 @@ const Billboard = (props) => {
       <SearchWindow state={props.state} 
                     keyListener={props.keyListener} 
                     onClickPopular={props.onClickPopular} 
-                    deleteIngredient={props.deleteIngredient} />
+                    deleteIngredient={props.deleteIngredient} 
+                    nextStep={props.nextStep}
+                    prevStep={props.prevStep}
+                    />
     </div>
   )
 
