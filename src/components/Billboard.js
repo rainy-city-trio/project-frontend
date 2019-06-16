@@ -1,14 +1,12 @@
 import React from 'react'
-import { makeStyles, rgbToHex } from '@material-ui/core/styles'
-import { deepOrange } from '@material-ui/core/colors'
+import { makeStyles } from '@material-ui/core/styles'
 import billboard from './../img/cropped2.png'
+import SearchWindow from './SearchWindow'
 
 const useStyles = makeStyles(theme => ({
   containerBillboard: {
     position: 'relative',
-    zIndex: -9999,
-    // backgroundColor: 'red',
-    // boxShadow: 'inset 10px 10px 10px 10px black'
+    zIndex: -1,
 },
   billBoard: {
     zIndex: -9999999999
@@ -21,18 +19,23 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     opacity: 1,
-    boxShadow: 'inset -300px -50px 80px 0px rgba(255,255,255,1)'
+    boxShadow: 'inset -90px -50px 80px 0px rgba(255,255,255,1)'
   }
 }));
 
-const Billboard = () => {
+const Billboard = (props) => {
+  console.log('billboard props', props.popularItems);
   const classes = useStyles();
   return (
     <div>
       <div className={classes.containerBillboard}>
         <img src={billboard} width="100%" height="100%" className={classes.billBoard} alt="" />
         <div className={classes.overlay}></div>
+        
       </div>
+      <SearchWindow popularItems={props.popularItems}
+                    newSearch={props.newSearch}
+                    keyListener={props.keyListener} />
     </div>
   )
 
