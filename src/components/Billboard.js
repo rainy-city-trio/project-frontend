@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Billboard = (props) => {
-  console.log('billboard props', props.popularItems);
+  console.log('billboard props', props.state);
   const classes = useStyles();
   return (
     <div>
@@ -33,8 +33,7 @@ const Billboard = (props) => {
         <div className={classes.overlay}></div>
         
       </div>
-      <SearchWindow popularItems={props.popularItems}
-                    newSearch={props.newSearch}
+      <SearchWindow state={props.state} 
                     keyListener={props.keyListener} />
     </div>
   )

@@ -5,8 +5,16 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const MenuItems = ['Recipes', 'Pantry', 'Meal Planner', 'Shopping List'];
 const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  menuItems: {
+    flexGrow: 1
+  },
   containerNavbar: {
     display: 'flex',
+    width: '110rem',
+    alignItems: 'center',
     justifyContent: 'space-between'
   },
   logo: {
@@ -23,12 +31,11 @@ const useStyles = makeStyles(theme => ({
 const NavBar = () => {
   const classes = useStyles();
   return (
-    <div>
+    <div className={classes.root}>
       <AppBar color="primary" className={classes.appBar} position="static">
         <Toolbar>
-          <Typography variant="title" color="inherit">
-            <div className={classes.containerNavbar}>
-              <div className="leftCorner">
+          <Typography variant="title" color="inherit" className={classes.menuItems}>
+            
                 <Button color="white" className={classes.logo}>
                   Zest
             </Button>
@@ -37,14 +44,15 @@ const NavBar = () => {
                     return <MenuItem item={item} key={index} />
                   })
                 }
-              </div>
-              <div className="rightCorner">
+              
+              </Typography>
+             
                 <Button variant="outlined" className={classes.loginBtn}>LOGIN</Button>
 
-              </div>
-            </div>
+              
+            
 
-          </Typography>
+          
         </Toolbar>
       </AppBar>
     </div>

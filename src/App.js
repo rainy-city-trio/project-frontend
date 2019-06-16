@@ -51,7 +51,8 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <NavBar />
-        <Billboard props={this.state} />
+        <Billboard  state={this.state}
+                    keyListener={this.keyListener} />
         
         {/* <Button color="primary">Primary</Button>
         <Button color="secondary">Secondary</Button> */}

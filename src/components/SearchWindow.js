@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -84,16 +84,19 @@ const useStyles = makeStyles(theme => ({
 
 
 const SearchWindow = (props) => {
+    console.log('search', props.state);
+    const { popularItems, newSearch } = props.state;
+     
     // const tokenState = useState([]);
     // console.log('props', props);
     
     const classes = useStyles();
-    const popularItemList = props.popularItems.map((item, index) => {
+    const popularItemList = popularItems.map((item, index) => {
         return <Button className={classes.button} variant="outlined" key={index}>
             {item}
         </Button>
     })
-    const tagList = props.newSearch.ingredients.map(token => {
+    const tagList = newSearch.ingredients.map(token => {
         return <Chip label={token} className={classes.chip} onDelete={props.keyListener} />
     })
     return (
