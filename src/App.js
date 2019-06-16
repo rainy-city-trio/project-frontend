@@ -24,14 +24,37 @@ const theme = createMuiTheme({
 
 class App extends Component {
   state = {
-    popularItems: ['eggs', 'chicken breasts', 'lettuce', 'tomatoes', 'onions', 'milk', 'coffee', 'flour', 'spinach', 'cheddar cheese', 'bread', 'lemon'],
+    popularItems: ['eggs', 'chicken', 'beef mince', 'lettuce', 'tomatoes', 'onions', 'milk', 'coffee', 'flour', 'spinach', 'cheddar cheese', 'bread', 'lemon', 'beans', 'bell peppers'],
+    // filteredItems: [],
     newSearch: {
-      ingredients: [],
+      ingredients: ['eggs'],
       dietaryR: '',
       season: '',
       readyIn: null
     }
   }
+  onClickPopular = (e) => {
+    // console.log(e.target.innerText);
+    let ingredients = [...this.state.newSearch.ingredients, e.target.innerText];
+    this.setState({
+      newSearch: {
+        ingredients
+      }
+    })
+  }
+  deleteIngredient = (token) => {
+    // console.log(token);
+    let ingredients = [...this.state.newSearch.ingredients].filter(ingredient => {
+      return (ingredient !== token)
+    });
+    // console.log('deleteIngredient', ingredients)
+    this.setState({
+      newSearch: {
+        ingredients
+      }
+    })
+  }
+  
   keyListener = (e) => {
     let value = e.target.value;
     console.log(value, e.keyCode);
@@ -52,7 +75,9 @@ class App extends Component {
       <ThemeProvider theme={theme}>
         <NavBar />
         <Billboard  state={this.state}
-                    keyListener={this.keyListener} />
+                    keyListener={this.keyListener}
+                    onClickPopular={this.onClickPopular} 
+                    deleteIngredient={this.deleteIngredient} />
         
         {/* <Button color="primary">Primary</Button>
         <Button color="secondary">Secondary</Button> */}

@@ -6,7 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
-import { Chip } from '@material-ui/core';
+import { Chip, Divider } from '@material-ui/core';
 // import {deepOrange} from '@material-ui/core/colors'
 // import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         // opacity: '.6',
         borderRadius: '.2rem',
         position: 'absolute',
-        top: '10rem',
+        top: '8rem',
         left: '50%',
         // transform: 'translate(-50%, -50%)',
         width: '40vw',
@@ -77,27 +77,31 @@ const useStyles = makeStyles(theme => ({
     },
     nextButton: {
         marginTop: '1rem',
+        marginBottom: '2rem'
 
     }
 }));
 
-
-
 const SearchWindow = (props) => {
     console.log('search', props.state);
     const { popularItems, newSearch } = props.state;
-     
-    // const tokenState = useState([]);
-    // console.log('props', props);
-    
+
+
+
     const classes = useStyles();
-    const popularItemList = popularItems.map((item, index) => {
-        return <Button className={classes.button} variant="outlined" key={index}>
+
+    let popularRender = popularItems.filter(item => {
+        return newSearch.ingredients.indexOf(item) === -1
+      });
+    console.log('popularRender', popularRender)
+
+    const popularItemList = popularRender.map((item, index) => {
+        return <Button onClick={props.onClickPopular} className={classes.button} variant="outlined" key={index}>
             {item}
         </Button>
     })
-    const tagList = newSearch.ingredients.map(token => {
-        return <Chip label={token} className={classes.chip} onDelete={props.keyListener} />
+    const tagList = newSearch.ingredients.map((token, index) => {
+        return <Chip label={token} className={classes.chip} key={index} onDelete={() => {props.deleteIngredient(token)}} />
     })
     return (
         <div className={classes.searchWindow}>
@@ -125,7 +129,8 @@ const SearchWindow = (props) => {
             <div className={classes.nextSubmit}>
                 <Button variant="contained" color="secondary" className={classes.nextButton}>NEXT</Button>
             </div>
-            <h2 className={classes.secondHeading}>Your recipe will include:</h2>
+            <Divider variant="middle" />
+            <h2 className={classes.secondHeading}>Your recipe will have...</h2>
             {tagList}
         </div>
     )
