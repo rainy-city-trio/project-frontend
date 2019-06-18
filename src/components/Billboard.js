@@ -1,6 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import billboard from './../img/cropped2.png'
+import billboard from './../img/cropped33.png'
 import SearchWindow from './SearchWindow'
 
 const useStyles = makeStyles(theme => ({
@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     opacity: 1,
-    boxShadow: 'inset -90px -50px 80px 0px rgba(255,255,255,1)'
+    boxShadow: 'inset -90px -30px 80px 0px rgba(255,255,255,1)'
   }
 }));
 
@@ -37,8 +37,12 @@ const Billboard = (props) => {
                     keyListener={props.keyListener} 
                     onClickPopular={props.onClickPopular} 
                     deleteIngredient={props.deleteIngredient} 
+                    deleteReqs={props.deleteReqs}
+                    deleteSeason={props.deleteSeason}
                     nextStep={props.nextStep}
                     prevStep={props.prevStep}
+                    toggleSpecial={props.toggleSpecial}
+                    toggleSeason={props.toggleSeason}
                     />
     </div>
   )

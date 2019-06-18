@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { blue } from '@material-ui/core/colors';
@@ -25,93 +26,146 @@ const theme = createMuiTheme({
 class App extends Component {
   state = {
     popularItems: ['eggs', 'chicken', 'beef mince', 'lettuce', 'tomatoes', 'onions', 'milk', 'coffee', 'flour', 'spinach', 'cheddar cheese', 'bread', 'lemon', 'beans', 'bell peppers'],
-    // filteredItems: [],
+    recipes: [
+      {id: 1, title: 'tuna pasta bake', ingredients: ['pasta', 'butter', 'plain flour', 'milk', 'cheddar cheese', 'tuna', 'sweetcorn', 'parsley'], image: 'https://rct-project.s3.eu-west-2.amazonaws.com/tuna-pasta-bake.jpg', url: "www.bbcgoodfood.com/recipes/9649/tuna-pasta-bake", prepTime: 30, special: ['']}
+    ],
     newSearch: {
-      ingredients: ['eggs'],
-      dietaryR: '',
-      season: '',
+      ingredients: [],
+      dietaryR: [],
+      seasons: [],
       readyIn: null
     },
     stepCount: 0,
     margin: 0
   }
   onClickPopular = (e) => {
-    // console.log(e.target.innerText);
+    let newSearch = { ...this.state.newSearch };
     let ingredients = [...this.state.newSearch.ingredients, e.target.innerText];
+    newSearch.ingredients = ingredients;
     this.setState({
-      newSearch: {
-        ingredients
-      }
+      newSearch
     })
   }
   deleteIngredient = (token) => {
-    // console.log(token);
+    let newSearch = { ...this.state.newSearch };
     let ingredients = [...this.state.newSearch.ingredients].filter(ingredient => {
       return (ingredient !== token)
     });
-    // console.log('deleteIngredient', ingredients)
+    newSearch.ingredients = ingredients;
     this.setState({
-      newSearch: {
-        ingredients
-      }
+      newSearch
     })
   }
-
-  keyListener = (e) => {
+  deleteSeason = (token) => {
+    let newSearch = { ...this.state.newSearch };
+    let seasons = [...this.state.newSearch.seasons].filter(season => {
+      return (season !== token)
+    });
+    newSearch.seasons = seasons;
+    this.setState({
+      newSearch
+    })
+  }
+  deleteReqs = (token) => {
+    let newSearch = { ...this.state.newSearch };
+    let reqs = [...this.state.newSearch.dietaryR].filter(req => {
+      return (req !== token)
+    });
+    newSearch.dietaryR = reqs;
+    this.setState({
+      newSearch
+    })
+  }
+  keyListener = (e) => {    // console.log(document.querySelector('.makeStyles-stepper-114'));
     let value = e.target.value;
-    console.log(value, e.keyCode);
     if (e.keyCode === 13 && value.length > 0) {
+      let newSearch = { ...this.state.newSearch };
       let ingredients = [...this.state.newSearch.ingredients, value];
-      console.log(ingredients);
+      newSearch.ingredients = ingredients;
       this.setState({
-        newSearch: {
-          ingredients
-        }
+        newSearch
       })
       e.target.value = '';
     }
-    // // console.log(tokens);
   }
-  
   nextStep = () => {
-    // console.log(document.querySelector('.makeStyles-stepper-114'));
-    let stepper = document.querySelector('.makeStyles-stepper-114');
-    let stepCount = this.state.stepCount + 1;
-    let margin = this.state.margin - 45;
-    this.setState({
-      stepCount,
-      margin
-    })
-    stepper.style.cssText = `margin-left: ${margin}vw`;
-    // let stepper = e.target.parentNode.parentNode.parentNode.children[0].children[0];
-    // stepper.style.cssText = "margin-left: -45vw"; 
-  }
+    if (this.state.newSearch.ingredients.length === 0) {
+      alert('no ingredients selected!')
+    } else {
+      let stepper = document.querySelector('.mainSearch > div > div');
+      let stepCount = this.state.stepCount + 1;
+      let margin = this.state.margin - 45;
+      this.setState({
+        stepCount,
+        margin
+      })
+      stepper.style.cssText = `margin-left: ${margin}vw`;
+    }
 
+  }
   prevStep = () => {
-    let stepper = document.querySelector('.makeStyles-stepper-114');
-    let stepCount = this.state.stepCount -1 ;
+    let stepper = document.querySelector('.mainSearch > div > div');
+    
+    let stepCount = this.state.stepCount - 1;
     let margin = this.state.margin + 45;
     stepper.style.cssText = `margin-left: ${margin}vw`;
     this.setState({
       stepCount,
       margin
     })
-    
+
+  }
+  toggleSpecial = (req) => {
+    let newSearch = { ...this.state.newSearch };
+    if (newSearch.dietaryR.indexOf(req) === -1) {
+      let dietaryR = [...this.state.newSearch.dietaryR, req];
+      newSearch.dietaryR = dietaryR;
+      this.setState({
+        newSearch
+      })
+    } else {
+      let dietaryR = [...this.state.newSearch.dietaryR];
+      dietaryR.splice(newSearch.dietaryR.indexOf(req), 1);
+      newSearch.dietaryR = dietaryR;
+      this.setState({
+        newSearch
+      })
+    }
+  }
+  toggleSeason = (season) => {
+    let newSearch = { ...this.state.newSearch };
+    if (newSearch.seasons.indexOf(season) === -1) {
+      let seasons = [...this.state.newSearch.seasons, season];
+      newSearch.seasons = seasons;
+      this.setState({
+        newSearch
+      })
+    } else {
+      let seasons = [...this.state.newSearch.seasons];
+      seasons.splice(newSearch.seasons.indexOf(season), 1);
+      newSearch.seasons = seasons;
+      this.setState({
+        newSearch
+      })
+    }
+
   }
   render() {
     return (
       <ThemeProvider theme={theme}>
         <NavBar />
-        <Billboard  state={this.state}
-                    keyListener={this.keyListener}
-                    onClickPopular={this.onClickPopular}
-                    deleteIngredient={this.deleteIngredient} 
-                    nextStep={this.nextStep}
-                    prevStep={this.prevStep}
-          />
+        <Billboard state={this.state}
+          keyListener={this.keyListener}
+          onClickPopular={this.onClickPopular}
+          deleteIngredient={this.deleteIngredient}
+          deleteSeason={this.deleteSeason}
+          deleteReqs={this.deleteReqs}
+          nextStep={this.nextStep}
+          prevStep={this.prevStep}
+          toggleSpecial={this.toggleSpecial}
+          toggleSeason={this.toggleSeason}
+        />
 
-        {/* <Button color="primary">Primary</Button>
-        <Button color="secondary">Secondary</Button> */}
       </ThemeProvider>
     );
   }

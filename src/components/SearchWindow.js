@@ -1,4 +1,5 @@
 import React from 'react'
+import './../App.css'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -6,7 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
-import { Chip, Divider, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Switch } from '@material-ui/core';
+import { Chip, Divider, FormControl, RadioGroup, FormControlLabel, Switch, Fade } from '@material-ui/core';
+import { purple } from '@material-ui/core/colors';
+// import HUE from '@material-ui/core/colors/HUE'; 
 // import {deepOrange} from '@material-ui/core/colors'
 // import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
 
@@ -17,7 +20,6 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center',
         width: "100%",
         marginBottom: '2rem'
-
     },
     input: {
         // marginLeft: 8,
@@ -27,25 +29,26 @@ const useStyles = makeStyles(theme => ({
         padding: 10,
     },
     divider: {
-        width: 1,
-        height: 28,
-        margin: 4,
+        marginTop: '2rem',
+        marginBottom: '2rem'
     },
     searchWindow: {
+        // transition: 'all 2s',
         overflow: 'hidden',
         zIndex: 0,
         backgroundColor: 'white',
         // opacity: '.6',
         borderRadius: '.2rem',
         position: 'absolute',
-        top: '8rem',
+        top: '17rem',
         left: '50%',
         // transform: 'translate(-50%, -50%)',
         width: '40vw',
         height: 'auto',
         padding: '2.2%',
         boxShadow: '0px 0px 10px rgba(0,0,0,.3)',
-        marginBottom: 0
+        marginBottom: 0,
+        transition: 'top .2s linear'
         // border: '1px solid rgba(0,0,0,.1)'
     },
     textField: {
@@ -71,7 +74,8 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '.5rem'
     },
     chip: {
-        marginRight: '.3rem'
+        marginRight: '.3rem',
+        marginBottom: '.3rem'
     },
     nextSubmit: {
         display: 'flex',
@@ -79,15 +83,12 @@ const useStyles = makeStyles(theme => ({
         // backgroundColor: 'blue',
         justifyContent: 'space-between'
     },
-    nextButton: {
-        // marginTop: '1rem',
-        marginBottom: '2rem'
-    },
+
     steppersContainer: {
         display: 'flex',
         width: '3000px',
         marginLeft: 0,
-        transition: 'margin-left 2s'
+        // transition: 'margin-left 2s'
     },
     stepper: {
         width: '40vw',
@@ -97,7 +98,7 @@ const useStyles = makeStyles(theme => ({
     group: {
         display: 'inline',
         marginTop: '.5rem',
-        marginBottom: '1rem'
+        marginBottom: '2rem'
     },
     popular: {
         marginTop: '1rem',
@@ -109,36 +110,74 @@ const useStyles = makeStyles(theme => ({
         letterSpacing: '.2rem',
         color: '#272D2D',
         margin: '0rem'
+    },
+    hiddenButton: {
+        opacity: 0
+    },
+    hiddenSearch: {
+        maxHeight: '0rem'
+        // opacity: 0,
+        // transition: 'height .3s'
     }
 }));
 
 const SearchWindow = (props) => {
-    console.log('search', props.state);
-    const { popularItems, newSearch } = props.state;
-
-
-
+    // constants and variables
+    const { popularItems, newSearch, stepCount } = props.state;
+    const reqs = ['Vegan', 'Vegetarian', 'Gluten-Free'];
+    const seasons = ['Winter', 'Spring', 'Summer', 'Autumn'];
     const classes = useStyles();
 
+    // popularRender filters out selected ingredients from the popular item list
+    // if user enters a popular item in the new search, 
+    // item will be filtered out from the popular item list
     let popularRender = popularItems.filter(item => {
         return newSearch.ingredients.indexOf(item) === -1
     });
-    console.log('popularRender', popularRender)
 
+    // rendering of (filtered) popular item list
     const popularItemList = popularRender.map((item, index) => {
         return <Button onClick={props.onClickPopular} className={classes.button} variant="outlined" key={index}>
             {item}
         </Button>
     })
+    // rendering of all ingredients selected
     const tagList = newSearch.ingredients.map((token, index) => {
-        return <Chip label={token} className={classes.chip} key={index} onDelete={() => { props.deleteIngredient(token) }} />
+        return (<Fade in="true">
+                    <Chip   label={token} 
+                            variant="outlined" 
+                            category="ingredients" 
+                            className={classes.chip} 
+                            key={index} 
+                            onDelete={() => { props.deleteIngredient(token) }} />
+                </Fade>)
+    })
+    // rendering of all requirements selected
+    const reqList = newSearch.dietaryR.map((req, index) => {
+        return (<Fade in="true">
+                    <Chip   label={req} 
+                            variant="outlined" 
+                            category="dietaryR" 
+                            className={classes.chip}   
+                            key={index} 
+                            onDelete={() => { props.deleteReqs(req) }} />
+                </Fade>)
+    })
+    // rendering of all seasons selected
+    const seasonList = newSearch.seasons.map((season, index) => {
+        return (<Fade in="true">
+                    <Chip   label={season} 
+                            variant="outlined" 
+                            category="seasons" 
+                            className={classes.chip} 
+                            key={index} 
+                            onDelete={() => { props.deleteSeason(season) }} />
+                </Fade>)
     })
     return (
-        <div className={classes.searchWindow}>
+        <div className={`mainSearch ${classes.searchWindow} ${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietaryR.length === 0) ? ('') : ('bigWindow')}`}>
             <div className={classes.steppersContainer}>
                 <div className={classes.stepper}>
-
-
                     <Paper className={classes.root}>
                         <IconButton className={classes.iconButton} aria-label="Menu">
                             <SearchIcon />
@@ -170,28 +209,26 @@ const SearchWindow = (props) => {
                             aria-label="special-diet"
                             name="special-diet"
                             className={classes.group}
-
                         >
-                            
-                            <FormControlLabel value="Vegetarian" control={<Switch />} label="Vegetarian" />
-                            <FormControlLabel value="Vegan" control={<Switch />} label="Vegan" />
-                            <FormControlLabel value="Gluten-Free" control={<Switch />} label="Gluten-Free" />
-                            <FormControlLabel value="Dairy-Free" control={<Switch />} label="Dairy-Free" />
-                            <FormControlLabel value="Nut-Free" control={<Switch />} label="Nut-Free" />
+                            {reqs.map(req => {
+                                return (
+                                    <FormControlLabel value={req} control={<Switch checked={(newSearch.dietaryR.includes(req)) ? (true) : (false)} />} label={req} onClick={() => { props.toggleSpecial(req) }} />
+                                )
+                            })}
                         </RadioGroup>
                         <h1 className={classes.thirdHeading}>Seasonal</h1>
                         <RadioGroup
                             aria-label="seasonal"
                             name="seasonal"
                             className={classes.group}
-
                         >
-                            <FormControlLabel value="Winter" control={<Switch />} label="Winter" />
-                            <FormControlLabel value="Spring" control={<Switch />} label="Spring" />
-                            <FormControlLabel value="Summer" control={<Switch />} label="Summer" />
-                            <FormControlLabel value="Autumn" control={<Switch />} label="Autumn" />
+                            {seasons.map(season => {
+                                return (
+                                    <FormControlLabel value={season} control={<Switch checked={(newSearch.seasons.includes(season)) ? (true) : (false)} />} label={season} onClick={() => { props.toggleSeason(season) }} />
+                                )
+                            })}
                         </RadioGroup>
-                        <h1 className={classes.thirdHeading}>Ready In...</h1>
+                        {/* <h1 className={classes.thirdHeading}>Ready In...</h1>
                         <RadioGroup
                             aria-label="ready-in"
                             name="ready-in"
@@ -202,7 +239,7 @@ const SearchWindow = (props) => {
                             <FormControlLabel value="Spring" control={<Switch />} label="20-30 minutes" />
                             <FormControlLabel value="Summer" control={<Switch />} label="30-40 minutes" />
                             <FormControlLabel value="Autumn" control={<Switch />} label="+40 minutes" />
-                        </RadioGroup>
+                        </RadioGroup> */}
                     </FormControl>
                 </div>
                 <div className={classes.stepper}>
@@ -229,14 +266,29 @@ const SearchWindow = (props) => {
                 </div>
             </div>
 
-            <div className={classes.nextSubmit}>
-                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.prevStep}>BACK</Button>
-
+            <div className={`prevNext ${classes.nextSubmit}`}>
+                <Button variant="outlined" color="secondary" className={(stepCount === 0) ? (classes.hiddenButton) : ('')} onClick={props.prevStep} disabled={(stepCount === 0) ? (true) : (false)}>BACK</Button>
                 <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.nextStep}>NEXT</Button>
             </div>
-            <Divider variant="middle" />
-            <h2 className={classes.secondHeading}>Your recipe will have...</h2>
-            {tagList}
+            <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietaryR.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+                <Divider className={classes.divider} variant="middle" />
+                
+                <section className={`${(newSearch.ingredients.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+
+                    <h2 className={classes.secondHeading}>Your items</h2>
+                    {tagList}
+                </section>
+                <section className={`${(newSearch.dietaryR.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+
+                    <h2 className={classes.secondHeading}>Your dietary requirements</h2>
+                    {reqList}
+                </section>
+                <section className={`${(newSearch.seasons.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+
+                    <h2 className={classes.secondHeading}>your seasonal preference</h2>
+                    {seasonList}
+                </section>
+            </section>
         </div>
     )
 

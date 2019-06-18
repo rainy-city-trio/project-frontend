@@ -2,6 +2,13 @@
   text-align: center;
 }
 
-.nextCard {
-  margin-left: -45vw
+section {
+  /* background-color: blue; */
+  max-height: 19.2rem;
+  overflow: hidden;
+  transition: max-height 0.2s linear;
+}
+
+.bigWindow {
+  top: 7.5rem !important;
 }
