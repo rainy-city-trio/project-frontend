@@ -242,33 +242,14 @@ const SearchWindow = (props) => {
                         </RadioGroup> */}
                     </FormControl>
                 </div>
-                <div className={classes.stepper}>
-
-
-                    <Paper className={classes.root}>
-                        <IconButton className={classes.iconButton} aria-label="Menu">
-                            <SearchIcon />
-                        </IconButton>
-                        <InputBase
-                            onKeyUp={props.keyListener}
-                            className={classes.input}
-                            placeholder="what's in your pantry?"
-                            inputProps={{ 'aria-label': 'What\'s in your pantry?' }}
-                        />
-                        <IconButton className={classes.iconButton} aria-label="Search">
-                            <MicIcon />
-                        </IconButton>
-
-                    </Paper>
-
-                    <h1 className={classes.heading}>Third Window</h1>
-                    {popularItemList}
-                </div>
+                
             </div>
 
             <div className={`prevNext ${classes.nextSubmit}`}>
                 <Button variant="outlined" color="secondary" className={(stepCount === 0) ? (classes.hiddenButton) : ('')} onClick={props.prevStep} disabled={(stepCount === 0) ? (true) : (false)}>BACK</Button>
-                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.nextStep}>NEXT</Button>
+                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.nextStep}>
+                    {(stepCount === 1) ? ('FIND YOUR RECIPE') : ('NEXT')}
+                </Button>
             </div>
             <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietaryR.length === 0) ? (classes.hiddenSearch) : ('')}`}>
                 <Divider className={classes.divider} variant="middle" />
