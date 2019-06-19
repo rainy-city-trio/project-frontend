@@ -12,3 +12,7 @@ section {
 .bigWindow {
   top: 7.5rem !important;
 }
+
+::-webkit-scrollbar { 
+  display: none; 
+}

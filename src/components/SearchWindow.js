@@ -8,7 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
 import { Chip, Divider, FormControl, RadioGroup, FormControlLabel, Switch, Fade } from '@material-ui/core';
-import { purple } from '@material-ui/core/colors';
+// import { purple } from '@material-ui/core/colors';
 // import HUE from '@material-ui/core/colors/HUE'; 
 // import {deepOrange} from '@material-ui/core/colors'
 // import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'

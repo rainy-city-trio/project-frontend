@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     opacity: 1,
-    boxShadow: 'inset -90px -30px 80px 0px rgba(255,255,255,1)'
+    boxShadow: 'inset -90px -90px 80px 0px rgba(255,255,255,1)'
   }
 }));
 

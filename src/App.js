@@ -6,6 +6,7 @@ import { blue } from '@material-ui/core/colors';
 // import Button from '@material-ui/core/Button';
 import NavBar from './components/NavBar';
 import Billboard from './components/Billboard';
+import Results from './components/Results';
 // import SearchWindow from './components/SearchWindow';
 
 const theme = createMuiTheme({
@@ -165,7 +166,7 @@ class App extends Component {
           toggleSpecial={this.toggleSpecial}
           toggleSeason={this.toggleSeason}
         />
-
+        <Results recipes={this.state.recipes}/>
       </ThemeProvider>
     );
   }
