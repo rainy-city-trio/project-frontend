@@ -247,7 +247,7 @@ const SearchWindow = (props) => {
 
             <div className={`prevNext ${classes.nextSubmit}`}>
                 <Button variant="outlined" color="secondary" className={(stepCount === 0) ? (classes.hiddenButton) : ('')} onClick={props.prevStep} disabled={(stepCount === 0) ? (true) : (false)}>BACK</Button>
-                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={props.nextStep}>
+                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={(stepCount === 1) ? (props.findRecipe) : (props.nextStep)}>
                     {(stepCount === 1) ? ('FIND YOUR RECIPE') : ('NEXT')}
                 </Button>
             </div>

@@ -43,6 +43,7 @@ const Billboard = (props) => {
                     prevStep={props.prevStep}
                     toggleSpecial={props.toggleSpecial}
                     toggleSeason={props.toggleSeason}
+                    findRecipe={props.findRecipe}
                     />
     </div>
   )

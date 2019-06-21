@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 const NavBar = () => {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div className={classes.root} id="navbar">
       <AppBar color="primary" className={classes.appBar} position="static">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.menuItems}>

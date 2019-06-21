@@ -1,17 +1,26 @@
 import React from 'react'
-import { makeStyles, Paper, Fab } from '@material-ui/core'
+import { makeStyles, Paper, Fab, Chip, createMuiTheme } from '@material-ui/core'
+import { teal, orange } from '@material-ui/core/colors/'
 import RecipeCard from './RecipeCard';
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeftOutlined";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightOutlined";
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpwardOutlined'
+
 const useStyles = makeStyles(theme => ({
+    rootHidden: {
+        opacity: 0
+    },
+    rootShow: {
+        opacity: 1
+    },
     heading: {
-        //   fontFamily: theme.headings.fontFamily,
-        marginBottom: '2rem',
-        fontSize: '2.7rem',
-        textTransform: 'uppercase',
+        fontFamily: theme.headings.fontFamily,
+        marginTop: '3rem',
+        marginBottom: '.3rem',
+        fontSize: '4rem',
+        textTransform: 'capitalize',
         textAlign: 'center',
-        fontWeight: 'bold',
-        letterSpacing: '.2rem',
+        fontWeight: 'normal',
         color: '#272D2D'
     },
     mainPaper: {
@@ -30,52 +39,107 @@ const useStyles = makeStyles(theme => ({
     },
     recipeResults: {
         width: '10000000px',
-        paddingLeft: '4.5rem'
+        paddingLeft: '4.5rem',
+        // height: '21rem'
     },
     chevronLeft: {
         backgroundColor: 'white',
         position: 'absolute',
         top: '50%',
-        transform: 'translateY(-50%)',
+        // transform: 'translateY(-50%)',
         left: '12vw',
         zIndex: '99999'
+    },
+    chevronHidden: {
+        backgroundColor: 'white',
+        position: 'absolute',
+        top: '50%',
+        // transform: 'translateY(-50%)',
+        left: '12vw',
+        zIndex: '99999',
+        opacity: 0
     },
     chevronRight: {
         backgroundColor: 'white',
         position: 'absolute',
         top: '50%',
-        transform: 'translateY(-50%)',
+        // transform: 'translateY(-50%)',
         right: '12vw',
         zIndex: '99999'
     },
     resultsContainer: {
-        // border: '2px solid black',
         height: 'auto',
-        marginBottom: '5rem',
+        marginTop: '2rem',
+        marginBottom: '20rem',
         position: 'relative'
+    },
+    results: {
+        // fontFamily: theme.headings.fontFamily,
+        textAlign: 'center',
+        fontSize: '1.5rem',
+        fontWeight: 'bold',
+        color: '#757575',
+        marginTop: '.3rem'
+    },
+    tagContainer: {
+        display: 'flex',
+        width: '50%',
+        margin: '0 auto',
+        justifyContent: 'center'
+    },
+    chip: {
+        marginRight: '0.5rem'
     }
 }));
 
 export default function Results(props) {
-    const { recipes } = props;
-    console.log(recipes);
+    const { recipes, resultStep, filteredRecipes, recipeRequest, newSearch } = props.state;
+    console.log('newSearch', newSearch.ingredients)
+    let steps;
+    if (filteredRecipes.length % 3 === 0) {
+        steps = Math.floor(filteredRecipes.length / 3) -1 
+    } else {
+        steps = Math.floor(filteredRecipes.length / 3)
+    }
+
+    const theme = createMuiTheme({
+        palette: {
+          primary: teal,
+          secondary: orange
+        },
+      });
     const classes = useStyles();
+    const handleClick = () => {
+        document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth'})
+    }
     return (
-        <div>
-            <h1 className={classes.heading}>Results</h1>
+        <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>
+            <h1 className={classes.heading} id="results">Results</h1>
+            <h4 className={classes.results}>You have {filteredRecipes.length} results</h4>
+            <div className={classes.tagContainer}>
+                {newSearch.ingredients.map(ing => {
+                    return (<Chip className={classes.chip} label={ing} />)
+                })}
+                {newSearch.seasons.map(season => {
+                    return (<Chip color="primary" className={classes.chip} label={season} />)
+                })}
+                {newSearch.dietaryR.map(req => {
+                    return (<Chip color="secondary" className={classes.chip} label={req} />)
+                })}
+                <Chip label="Refine Search" variant="outlined" onClick={handleClick} className={classes.refineSearch} icon={<ArrowUpwardIcon />} />
+            </div>
+
             <div className={classes.resultsContainer}>
-                <Fab size="small" aria-label="Add" className={classes.chevronLeft}>
+                <Fab size="small" aria-label="Add" disabled={(resultStep === 1) ? (true) : (false)} onClick={() => { props.navResult('left') }} className={(resultStep === 1) ? (classes.chevronHidden) : (classes.chevronLeft)}>
                     <ChevronLeftIcon />
                 </Fab>
-                <Fab size="small" aria-label="Add" className={classes.chevronRight}>
+                <Fab size="small" aria-label="Add" disabled={(resultStep > steps) ? (true) : (false)} onClick={() => { props.navResult('right') }} className={(resultStep > steps) ? (classes.chevronHidden) : (classes.chevronRight)}>
                     <ChevronRightIcon />
                 </Fab>
                 <Paper className={classes.mainPaper}>
-
                     <div className={classes.recipeResults}>
                         {
-                            
-                            recipes.map((recipe, index) => {
+                            filteredRecipes.map((recipe, index) => {
                                 return <RecipeCard key={index} recipe={recipe} />
                             })
                         }
