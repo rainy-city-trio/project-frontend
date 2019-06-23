@@ -5,8 +5,11 @@ import { blue } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
 import NavBar from './components/NavBar';
 import Billboard from './components/Billboard';
-import SearchWindow from './components/SearchWindow';
+import Results from './components/Results';
+import { filterRecipes } from './helpers'
+import Footer from './components/Footer';
 import axios from 'axios';
+// import SearchWindow from './components/SearchWindow';
 
 const theme = createMuiTheme({
   palette: {
