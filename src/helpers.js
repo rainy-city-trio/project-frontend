@@ -22,6 +22,29 @@ const calcPercentage = (ingredientMatch, ingredientsLength) => {
   return parseInt(percentage)
 }
 
+const ingredientsMatched = (ingredients, recipeIngredients) => {
+  // ingredients = ['xxx', 'xxx']
+  // recipeIngredients = [{ingredient: 'xxxx', qty: 'xxxx'}, {ingredient: 'xxxx', qty: 'xxxx'}]
+  const matched = recipeIngredients.filter(elem => {
+    return (ingredients.includes(elem.ingredient))
+  })
+  return matched
+}
+
+const renderMatches = (matched) => {
+  let ingArray = [];
+  matched.forEach(elem => {
+    ingArray.push(elem.ingredient)
+  })
+//   ingArray.splice(ingArray.length-1, 0, 'and');
+  let string = ' ' + ingArray.join(', ') + '';
+  let lastElement = ingArray[ingArray.length-2] + ", " + ingArray[ingArray.length-1];
+  let newElement = ingArray[ingArray.length-2] + " and " + ingArray[ingArray.length-1];
+//   console.log(lastElement, newElement);
+  string = string.replace(lastElement, newElement)
+  return string
+}
+
 // const filterRecipes = (recipes, ingredients, seasons, special) => {
 //   let filtered = [];
 //   let filtI = [];
@@ -65,6 +88,7 @@ module.exports = {
   capitalizeWords,
   checkIngredientMatch,
   sortRecipesByMatch,
-  calcPercentage
-  // filterRecipes
+  calcPercentage,
+  ingredientsMatched,
+  renderMatches
 }

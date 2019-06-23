@@ -13,9 +13,14 @@ import { CardActionArea, Button } from '@material-ui/core';
 import { capitalizeWords } from './../helpers'
 import { faSnowflake, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons'
 import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons'
-import { calcPercentage } from './../helpers'
+import { calcPercentage, ingredientsMatched, renderMatches } from './../helpers'
 
 const useStyles = makeStyles(theme => ({
+    matches: {
+        fontSize: '.9rem',
+        textAlign: 'center',
+        width: '80%'
+    },
     card: {
         maxWidth: 365,
         width: 365,
@@ -62,14 +67,16 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column',
         height: '230px',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: '2.5rem 0rem'
         // alignItems: 'flex-end'
     },
     recipeTitle: {
         width: '70%',
         fontWeight: 'bold',
         textAlign: 'center',
-        margin: '0 auto'
+        margin: '0 auto',
+        padding: '.3rem 0'
     },
     percentage: {
         // width: '100px',
@@ -79,14 +86,19 @@ const useStyles = makeStyles(theme => ({
         // backgroundColor: 'red',
         top: 0,
         right: 0
-    }
+    },
+    matchedIngredients: {
+        fontWeight: 'bold'
+        }
 }));
 
 export default function RecipeCard(props) {
-    // console.log('recipecard', props)
+    console.log('recipecard', props)
     const { recipe, newSearch } = props;
     const classes = useStyles();
 
+    const matched = ingredientsMatched(newSearch.ingredients, recipe.ingredients);
+    console.log('matched', matched)
     const chooseIcon = (season) => {
         switch (season) {
             case 'Winter':
@@ -130,7 +142,7 @@ export default function RecipeCard(props) {
                 />
                 <div className={classes.percentage}>
                     <Button size="small" variant="contained" color="primary">{calcPercentage(recipe.ingredientMatch, newSearch.ingredients.length)}% Match</Button>
-                
+
                 </div>
             </CardActionArea>
             <div className={classes.recipeDescription}>
@@ -139,8 +151,17 @@ export default function RecipeCard(props) {
                         {capitalizeWords(recipe.name)}
                     </Typography>
                 </CardContent>
+                <Typography variant="subtitle1" className={classes.matches}>
+                    This recipe includes
+                    <span className={classes.matchedIngredients}>
+                        {
+                            renderMatches(matched)
+                        }
+                    </span>
+
+                </Typography>
                 <CardActions className={classes.cardActions} disableSpacing>
-                    
+
                     {chooseIcon(recipe.seasonName)}
                     <ThemeProvider theme={theme}>
                         {chooseReqs(recipe.dietaryId)}
