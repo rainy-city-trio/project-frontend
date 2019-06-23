@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import NavBar from './components/NavBar';
 import Billboard from './components/Billboard';
 import SearchWindow from './components/SearchWindow';
+import axios from 'axios';
 
 const theme = createMuiTheme({
   palette: {
