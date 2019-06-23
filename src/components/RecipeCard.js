@@ -13,6 +13,7 @@ import { CardActionArea, Button } from '@material-ui/core';
 import { capitalizeWords } from './../helpers'
 import { faSnowflake, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons'
 import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons'
+import { calcPercentage } from './../helpers'
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -69,12 +70,21 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         textAlign: 'center',
         margin: '0 auto'
+    },
+    percentage: {
+        // width: '100px',
+        // height: '100px',
+        position: 'absolute',
+        padding: '.3rem .3rem 0 0',
+        // backgroundColor: 'red',
+        top: 0,
+        right: 0
     }
 }));
 
 export default function RecipeCard(props) {
-    console.log('recipecard', props)
-    const { recipe } = props;
+    // console.log('recipecard', props)
+    const { recipe, newSearch } = props;
     const classes = useStyles();
 
     const chooseIcon = (season) => {
@@ -118,6 +128,10 @@ export default function RecipeCard(props) {
                     image={recipe.picture}
                     title={recipe.name}
                 />
+                <div className={classes.percentage}>
+                    <Button size="small" variant="contained" color="primary">{calcPercentage(recipe.ingredientMatch, newSearch.ingredients.length)}% Match</Button>
+                
+                </div>
             </CardActionArea>
             <div className={classes.recipeDescription}>
                 <CardContent>
@@ -126,7 +140,7 @@ export default function RecipeCard(props) {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions} disableSpacing>
-                    {recipe.ingredientMatch}
+                    
                     {chooseIcon(recipe.seasonName)}
                     <ThemeProvider theme={theme}>
                         {chooseReqs(recipe.dietaryId)}

@@ -124,7 +124,7 @@ export default function Results(props) {
         document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth'})
     }
     const results = (filteredRecipes.length > 0) ? (filteredRecipes.map((recipe, index) => {
-        return <RecipeCard key={index} recipe={recipe} />
+        return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
     })) : ([0,1,2].map(el => {
         return <BlankRecipeCard />
     }))

@@ -12,6 +12,15 @@ const checkIngredientMatch = (recipes) => {
   return filtered
 }
 
+const sortRecipesByMatch = (recipes) => {
+  let sorted = recipes.sort(function(a,b) {return (b.ingredientMatch - a.ingredientMatch)})
+  return sorted
+}
+
+const calcPercentage = (ingredientMatch, ingredientsLength) => {
+  const percentage = (ingredientMatch / ingredientsLength) * 100;
+  return parseInt(percentage)
+}
 
 // const filterRecipes = (recipes, ingredients, seasons, special) => {
 //   let filtered = [];
@@ -54,6 +63,8 @@ const checkIngredientMatch = (recipes) => {
 
 module.exports = {
   capitalizeWords,
-  checkIngredientMatch
+  checkIngredientMatch,
+  sortRecipesByMatch,
+  calcPercentage
   // filterRecipes
 }
