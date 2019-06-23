@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
         // alignItems: 'flex-end'
     },
     recipeTitle: {
-        width: '60%',
+        width: '70%',
         fontWeight: 'bold',
         textAlign: 'center',
         margin: '0 auto'

@@ -396,10 +396,10 @@ class App extends Component {
   })
     this.setState({recipeRequest: true})
     document.querySelector('#results').scrollIntoView({block: 'start', behavior: 'smooth'})
-    let recipes = [...this.state.recipes];
+    // let recipes = [...this.state.recipes];
     let ingredients = [...this.state.newSearch.ingredients];
-    let special = this.state.newSearch.dietary;
-    let seasons = [...this.state.newSearch.seasons];
+    // let special = this.state.newSearch.dietary;
+    // let seasons = [...this.state.newSearch.seasons];
     if (ingredients.length === 0) {
       alert('please select some ingredients')
     }
@@ -455,10 +455,7 @@ class App extends Component {
   }
   deleteReqs = (token) => {
     let newSearch = { ...this.state.newSearch };
-    let reqs = [...this.state.newSearch.dietary].filter(req => {
-      return (req !== token)
-    });
-    newSearch.dietary = reqs;
+    newSearch.dietary = 'none';
     this.setState({
       newSearch
     })
