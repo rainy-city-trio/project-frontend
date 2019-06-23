@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Billboard = (props) => {
-  console.log('billboard props', props.state);
+  // console.log('billboard props', props.state);
   const classes = useStyles();
   return (
     <div>

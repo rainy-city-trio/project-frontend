@@ -153,16 +153,14 @@ const SearchWindow = (props) => {
                 </Fade>)
     })
     // rendering of all requirements selected
-    const reqList = newSearch.dietaryR.map((req, index) => {
-        return (<Fade in="true">
-                    <Chip   label={req} 
+    const reqList = (<Fade in="true">
+                    <Chip   label={newSearch.dietary} 
                             variant="outlined" 
-                            category="dietaryR" 
+                            category="dietary" 
                             className={classes.chip}   
-                            key={index} 
-                            onDelete={() => { props.deleteReqs(req) }} />
-                </Fade>)
-    })
+                            onDelete={() => { props.deleteReqs(newSearch.dietary) }} />
+                </Fade>);
+
     // rendering of all seasons selected
     const seasonList = newSearch.seasons.map((season, index) => {
         return (<Fade in="true">
@@ -175,7 +173,7 @@ const SearchWindow = (props) => {
                 </Fade>)
     })
     return (
-        <div className={`mainSearch ${classes.searchWindow} ${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietaryR.length === 0) ? ('') : ('bigWindow')}`}>
+        <div className={`mainSearch ${classes.searchWindow} ${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary.length === 0) ? ('') : ('bigWindow')}`}>
             <div className={classes.steppersContainer}>
                 <div className={classes.stepper}>
                     <Paper className={classes.root}>
@@ -212,7 +210,7 @@ const SearchWindow = (props) => {
                         >
                             {reqs.map(req => {
                                 return (
-                                    <FormControlLabel value={req} control={<Switch checked={(newSearch.dietaryR.includes(req)) ? (true) : (false)} />} label={req} onClick={() => { props.toggleSpecial(req) }} />
+                                    <FormControlLabel value={req} control={<Switch checked={(newSearch.dietary.includes(req)) ? (true) : (false)} />} label={req} onClick={() => { props.toggleSpecial(req) }} />
                                 )
                             })}
                         </RadioGroup>
@@ -247,11 +245,11 @@ const SearchWindow = (props) => {
 
             <div className={`prevNext ${classes.nextSubmit}`}>
                 <Button variant="outlined" color="secondary" className={(stepCount === 0) ? (classes.hiddenButton) : ('')} onClick={props.prevStep} disabled={(stepCount === 0) ? (true) : (false)}>BACK</Button>
-                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={(stepCount === 1) ? (props.findRecipe) : (props.nextStep)}>
+                <Button variant="outlined" color="secondary" className={classes.nextButton} onClick={(stepCount === 1) ? (() => {props.findRecipe(newSearch)}) : (props.nextStep)}>
                     {(stepCount === 1) ? ('FIND YOUR RECIPE') : ('NEXT')}
                 </Button>
             </div>
-            <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietaryR.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+            <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary.length === 0) ? (classes.hiddenSearch) : ('')}`}>
                 <Divider className={classes.divider} variant="middle" />
                 
                 <section className={`${(newSearch.ingredients.length === 0) ? (classes.hiddenSearch) : ('')}`}>
@@ -259,7 +257,7 @@ const SearchWindow = (props) => {
                     <h2 className={classes.secondHeading}>Your items</h2>
                     {tagList}
                 </section>
-                <section className={`${(newSearch.dietaryR.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+                <section className={`${(newSearch.dietary.length === 0) ? (classes.hiddenSearch) : ('')}`}>
 
                     <h2 className={classes.secondHeading}>Your dietary requirements</h2>
                     {reqList}

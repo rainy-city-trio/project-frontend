@@ -2,16 +2,26 @@ import React from 'react'
 import { makeStyles, Paper, Fab, Chip, createMuiTheme } from '@material-ui/core'
 import { teal, orange } from '@material-ui/core/colors/'
 import RecipeCard from './RecipeCard';
+import BlankRecipeCard from './BlankRecipeCard'
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeftOutlined";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightOutlined";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpwardOutlined'
 
 const useStyles = makeStyles(theme => ({
+    overlay: {
+        position: 'absolute',
+        width: '74.5%',
+        backgroundColor: 'red',
+        height: '10rem',
+        display: 'none'
+    },
     rootHidden: {
-        opacity: 0
+        opacity: 0,
+        position: 'relative'
     },
     rootShow: {
-        opacity: 1
+        opacity: 1,
+        position: 'relative'
     },
     heading: {
         fontFamily: theme.headings.fontFamily,
@@ -24,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         color: '#272D2D'
     },
     mainPaper: {
-        width: '74.5%',
+        width: '74.1%',
         margin: '0 auto',
         paddingTop: '4rem',
         paddingBottom: '4rem',
@@ -40,6 +50,7 @@ const useStyles = makeStyles(theme => ({
     recipeResults: {
         width: '10000000px',
         paddingLeft: '4.5rem',
+        display: 'flex'
         // height: '21rem'
     },
     chevronLeft: {
@@ -94,7 +105,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function Results(props) {
     const { recipes, resultStep, filteredRecipes, recipeRequest, newSearch } = props.state;
-    console.log('newSearch', newSearch.ingredients)
+    // console.log('newSearch', newSearch.ingredients)
     let steps;
     if (filteredRecipes.length % 3 === 0) {
         steps = Math.floor(filteredRecipes.length / 3) -1 
@@ -112,8 +123,14 @@ export default function Results(props) {
     const handleClick = () => {
         document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth'})
     }
+    const results = (filteredRecipes.length > 0) ? (filteredRecipes.map((recipe, index) => {
+        return <RecipeCard key={index} recipe={recipe} />
+    })) : ([0,1,2].map(el => {
+        return <BlankRecipeCard />
+    }))
     return (
         <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>
+            
             <h1 className={classes.heading} id="results">Results</h1>
             <h4 className={classes.results}>You have {filteredRecipes.length} results</h4>
             <div className={classes.tagContainer}>
@@ -123,13 +140,16 @@ export default function Results(props) {
                 {newSearch.seasons.map(season => {
                     return (<Chip color="primary" className={classes.chip} label={season} />)
                 })}
-                {newSearch.dietaryR.map(req => {
-                    return (<Chip color="secondary" className={classes.chip} label={req} />)
-                })}
+                
+                    <Chip color="secondary" className={classes.chip} label={newSearch.dietary} />
+               
                 <Chip label="Refine Search" variant="outlined" onClick={handleClick} className={classes.refineSearch} icon={<ArrowUpwardIcon />} />
             </div>
 
             <div className={classes.resultsContainer}>
+            <div className={classes.overlay}>
+                
+                </div>
                 <Fab size="small" aria-label="Add" disabled={(resultStep === 1) ? (true) : (false)} onClick={() => { props.navResult('left') }} className={(resultStep === 1) ? (classes.chevronHidden) : (classes.chevronLeft)}>
                     <ChevronLeftIcon />
                 </Fab>
@@ -137,11 +157,11 @@ export default function Results(props) {
                     <ChevronRightIcon />
                 </Fab>
                 <Paper className={classes.mainPaper}>
+                    
                     <div className={classes.recipeResults}>
+                        
                         {
-                            filteredRecipes.map((recipe, index) => {
-                                return <RecipeCard key={index} recipe={recipe} />
-                            })
+                            results
                         }
                     </div>
                 </Paper>

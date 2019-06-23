@@ -1,29 +1,14 @@
 import React from 'react';
-// import clsx from 'clsx';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-// import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
-// import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-// import Collapse from '@material-ui/core/Collapse';
-// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red, teal } from '@material-ui/core/colors';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import ShareIcon from '@material-ui/icons/Share';
-// import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-// import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// faSnowflake: winter, faSun: summer, faSeedling: spring, faCanadianMapleLeaf: autumn
-// faLeaf: vegan
-// import { faLeaf, faCarrot } from '@fortawesome/free-solid-svg-icons'
-// import glutenfree from './../img/glutenfree.svg'
-// import vegan from './../img/vegan.svg'
-// import gluten from './../img/gluten2.svg'
 import { CardActionArea, Button } from '@material-ui/core';
 import { capitalizeWords } from './../helpers'
 import { faSnowflake, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons'
@@ -40,11 +25,11 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             transition: 'all .3s linear',
             boxShadow: '0px 0px 10px rgba(0,0,0,.3)'
-          }
+        }
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '56.25%',
     },
     expand: {
         transform: 'rotate(0deg)',
@@ -64,8 +49,26 @@ const useStyles = makeStyles(theme => ({
     },
     glutenIcon: {
         marginRight: '.2rem',
-        // width: '50%',
-        // heigth: '50%'
+    },
+    cardActions: {
+        justifyContent: 'center'
+    },
+    center: {
+        textAlign: 'center'
+    },
+    recipeDescription: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: '230px',
+    alignItems: 'center',
+    justifyContent: 'center'
+        // alignItems: 'flex-end'
+    },
+    recipeTitle: {
+        width: '60%',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        margin: '0 auto'
     }
 }));
 
@@ -76,13 +79,13 @@ export default function RecipeCard(props) {
 
     const chooseIcon = (season) => {
         switch (season) {
-            case 'winter':
+            case 'Winter':
                 return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSnowflake} />{season}</Button></IconButton>);
-            case 'spring':
+            case 'Spring':
                 return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSeedling} />{season}</Button></IconButton>);
-            case 'summer':
+            case 'Summer':
                 return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSun} />{season}</Button></IconButton>);
-            case 'autumn':
+            case 'Autumn':
                 return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faCanadianMapleLeaf} />{season}</Button></IconButton>);
             default:
                 return '';
@@ -90,56 +93,45 @@ export default function RecipeCard(props) {
     }
     const theme = createMuiTheme({
         palette: {
-          primary: teal
+            primary: teal
         },
-      });
+    });
     const chooseReqs = (req) => {
         switch (req) {
-            case 'vegan':
-                return (<IconButton disabled><Button color="primary" variant="outlined">{req}</Button></IconButton>);
-            case 'vegetarian':
-                return (<IconButton disabled><Button color="primary" variant="outlined">{req}</Button></IconButton>);
-            case 'gluten-free':
-                return (<IconButton disabled><Button color="primary" variant="outlined">{req}</Button></IconButton>);
+            case 1:
+                return (<IconButton disabled><Button color="primary" variant="outlined">VEGETARIAN</Button></IconButton>);
+            case 2:
+                return (<IconButton disabled><Button color="primary" variant="outlined">VEGAN</Button></IconButton>);
+            case 3:
+                return (<IconButton disabled><Button color="primary" variant="outlined">GLUTEN-FREE</Button></IconButton>);
+            case 4:
+                return '';
             default:
                 return '';
         }
     }
-    
-
     return (
         <Card className={`recipeCard ${classes.card}`}>
             <CardActionArea>
                 <CardMedia
                     className={classes.media}
-                    image={recipe.image}
-                    title={recipe.title}
+                    image={recipe.picture}
+                    title={recipe.name}
                 />
             </CardActionArea>
-
-
-            <CardContent>
-                <Typography variant="h5" component="h1">
-                    {capitalizeWords(recipe.title)}
-                    
-                </Typography>
-                {/* <Typography variant="body2" color="textSecondary" component="p">
-                    {recipe.description}
-        </Typography> */}
-            </CardContent>
-            <CardActions disableSpacing>
-                {/* <IconButton aria-label="Add to favorites">
-                    <FavoriteIcon />
-                </IconButton> */}
-                {/* <IconButton aria-label="Share">
-                    <ShareIcon />
-                </IconButton> */}
-                {chooseIcon(recipe.season)}
-                <ThemeProvider theme={theme}>
-                {chooseReqs(recipe.special)}
-                </ThemeProvider>
-            </CardActions>
-
+            <div className={classes.recipeDescription}>
+                <CardContent>
+                    <Typography className={classes.recipeTitle} variant="h5" component="h1">
+                        {capitalizeWords(recipe.name)}
+                    </Typography>
+                </CardContent>
+                <CardActions className={classes.cardActions} disableSpacing>
+                    {chooseIcon(recipe.seasonName)}
+                    <ThemeProvider theme={theme}>
+                        {chooseReqs(recipe.dietaryId)}
+                    </ThemeProvider>
+                </CardActions>
+            </div>
         </Card>
     );
 }
