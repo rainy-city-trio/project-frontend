@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         color: '#272D2D'
     },
     mainPaper: {
-        width: '74.1%',
+        width: '87rem',
         margin: '0 auto',
         paddingTop: '4rem',
         paddingBottom: '4rem',

@@ -257,7 +257,7 @@ const SearchWindow = (props) => {
                     <h2 className={classes.secondHeading}>Your items</h2>
                     {tagList}
                 </section>
-                <section className={`${(newSearch.dietary.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+                <section className={`${(newSearch.dietary === 'none') ? (classes.hiddenSearch) : ('')}`}>
 
                     <h2 className={classes.secondHeading}>Your dietary requirements</h2>
                     {reqList}

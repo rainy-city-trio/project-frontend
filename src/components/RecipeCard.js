@@ -60,8 +60,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         height: '230px',
-    alignItems: 'center',
-    justifyContent: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
         // alignItems: 'flex-end'
     },
     recipeTitle: {
@@ -126,6 +126,7 @@ export default function RecipeCard(props) {
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.cardActions} disableSpacing>
+                    {recipe.ingredientMatch}
                     {chooseIcon(recipe.seasonName)}
                     <ThemeProvider theme={theme}>
                         {chooseReqs(recipe.dietaryId)}
