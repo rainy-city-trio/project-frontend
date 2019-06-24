@@ -26,6 +26,14 @@ const useStyles = makeStyles(theme => ({
   loginBtn: {
     color: 'white',
     borderColor: 'white'
+  },
+  '@media screen and (max-width: 425px)': {
+    menuItems: {
+    textAlign: 'left'
+    },
+    containerNavBar: {
+      flexDirection: 'column',
+    }
   }
 }));
 
