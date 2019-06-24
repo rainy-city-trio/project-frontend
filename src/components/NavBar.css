@@ -1,0 +1,34 @@
+/* @media screen and (max-width: 600px) {
+    .topnav a {
+      float: none;
+      width: 100%;
+    }
+  }
+  
+  /* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+  /*@media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+    }
+  } */
+  
+  /* @media screen and (max-width: 425px) {
+    .menuItems {
+    text-align: left;
+    }
+  } */
+
+  @media screen and (max-width: 425px) {
+   .menuItems {
+      flex-grow: 0;
+      flex-direction: column nowrap;
+      align-items: left;
+      flex: 25%
+    }
+    .containerNavBar {
+      flex-grow: 0;
+      flex-direction: column nowrap;
+      align-items: left; 
+      flex: 25%
+    }
+  }

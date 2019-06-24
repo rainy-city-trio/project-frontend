@@ -11,7 +11,8 @@ import { Chip, Divider, FormControl, RadioGroup, FormControlLabel, Switch, Fade 
 // import { purple } from '@material-ui/core/colors';
 // import HUE from '@material-ui/core/colors/HUE'; 
 // import {deepOrange} from '@material-ui/core/colors'
-// import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline'
+// import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
+import './SearchWindow.css'
 
 const useStyles = makeStyles(theme => ({
     root: {
