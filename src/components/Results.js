@@ -121,14 +121,6 @@ export default function Results(props) {
             primary: teal,
             secondary: orange
         },
-
-        @media ${device.laptop} { 
-            max-width: 800px;
-        }
-
-        @media ${device.desktop} {
-            max-width: 1400px;
-        }
     });
 
     const classes = useStyles();
