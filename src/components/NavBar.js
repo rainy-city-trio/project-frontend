@@ -12,12 +12,6 @@ const useStyles = makeStyles(theme => ({
   menuItems: {
     flexGrow: 1
   },
-  containerNavbar: {
-    display: 'flex',
-    width: '110rem',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
   logo: {
     fontFamily: theme.headings.fontFamily,
     color: 'white',
@@ -26,6 +20,17 @@ const useStyles = makeStyles(theme => ({
   loginBtn: {
     color: 'white',
     borderColor: 'white'
+  },
+  appBar: {
+    [theme.breakpoints.down('md')]: {
+      backgroundColor: 'blue',
+    },
+    [theme.breakpoints.down('sm')]: {
+      backgroundColor: 'yellow'
+    },
+    [theme.breakpoints.down('xs')]: {
+      backgroundColor: 'pink',
+    },
   }
 }));
 
