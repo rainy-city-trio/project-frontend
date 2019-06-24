@@ -16,17 +16,28 @@ section {
 ::-webkit-scrollbar { 
   display: none; 
 }
-
-/* On screens that are 992px or less, set the background color to blue */
-@media screen and (max-width: 992px) {
+/*
+@media screen and (max-width: 768px) {
   body {
     background-color: blue;
   }
 }
 
-/* On screens that are 600px or less, set the background color to olive */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 425px) {
   body {
     background-color: olive;
   }
 }
+
+@media screen and (max-width: 375px) {
+  body {
+    background-color: pink;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  body {
+    background-color: yellow;
+  }
+}
+*/
