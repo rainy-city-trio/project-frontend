@@ -8,10 +8,6 @@ import SearchIcon from '@material-ui/icons/Search';
 import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
 import { Chip, Divider, FormControl, RadioGroup, FormControlLabel, Switch, Fade } from '@material-ui/core';
-// import { purple } from '@material-ui/core/colors';
-// import HUE from '@material-ui/core/colors/HUE'; 
-// import {deepOrange} from '@material-ui/core/colors'
-// import RemoveCircleOutlineIcon from '@material-ui/icons/RemoveCircleOutline';
 import './SearchWindow.css'
 
 const useStyles = makeStyles(theme => ({
@@ -227,18 +223,6 @@ const SearchWindow = (props) => {
                                 )
                             })}
                         </RadioGroup>
-                        {/* <h1 className={classes.thirdHeading}>Ready In...</h1>
-                        <RadioGroup
-                            aria-label="ready-in"
-                            name="ready-in"
-                            className={classes.group}
-
-                        >
-                            <FormControlLabel value="Winter" control={<Switch />} label="< 20 minutes" />
-                            <FormControlLabel value="Spring" control={<Switch />} label="20-30 minutes" />
-                            <FormControlLabel value="Summer" control={<Switch />} label="30-40 minutes" />
-                            <FormControlLabel value="Autumn" control={<Switch />} label="+40 minutes" />
-                        </RadioGroup> */}
                     </FormControl>
                 </div>
                 
@@ -252,19 +236,15 @@ const SearchWindow = (props) => {
             </div>
             <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary === 'none') ? (classes.hiddenSearch) : ('')}`}>
                 <Divider className={classes.divider} variant="middle" />
-                
                 <section className={`${(newSearch.ingredients.length === 0) ? (classes.hiddenSearch) : ('')}`}>
-
                     <h2 className={classes.secondHeading}>Your items</h2>
                     {tagList}
                 </section>
                 <section className={`${(newSearch.dietary === 'none') ? (classes.hiddenSearch) : ('')}`}>
-
                     <h2 className={classes.secondHeading}>Your dietary requirements</h2>
                     {reqList}
                 </section>
                 <section className={`${(newSearch.seasons.length === 0) ? (classes.hiddenSearch) : ('')}`}>
-
                     <h2 className={classes.secondHeading}>your seasonal preference</h2>
                     {seasonList}
                 </section>

@@ -60,7 +60,9 @@ class App extends Component {
     console.log(err)
   })
     this.setState({recipeRequest: true})
-    document.querySelector('#results').scrollIntoView({block: 'start', behavior: 'smooth'})
+    setTimeout(() => {
+      document.querySelector('#results').scrollIntoView({block: 'start', behavior: 'smooth'})
+    }, 300)
     // let recipes = [...this.state.recipes];
     let ingredients = [...this.state.newSearch.ingredients];
     // let special = this.state.newSearch.dietary;
@@ -125,7 +127,7 @@ class App extends Component {
       newSearch
     })
   }
-  keyListener = (e) => {    // console.log(document.querySelector('.makeStyles-stepper-114'));
+  keyListener = (e) => {    
     let value = e.target.value;
     if (e.keyCode === 13 && value.length > 0) {
       let newSearch = { ...this.state.newSearch };
@@ -177,20 +179,6 @@ class App extends Component {
         newSearch
       })
     }
-    // if (newSearch.dietary.indexOf(req) === -1) {
-    //   let dietaryR = [...this.state.newSearch.dietary, req];
-    //   newSearch.dietary = dietaryR;
-    //   this.setState({
-    //     newSearch
-    //   })
-    // } else {
-    //   let dietaryR = [...this.state.newSearch.dietary];
-    //   dietaryR.splice(newSearch.dietary.indexOf(req), 1);
-    //   newSearch.dietary = dietaryR;
-    //   this.setState({
-    //     newSearch
-    //   })
-    // }
   }
   toggleSeason = (season) => {
     let newSearch = { ...this.state.newSearch };
@@ -230,7 +218,7 @@ class App extends Component {
         <Results    
                     state={this.state}
                     navResult={this.navResult}/>
-        <Footer />           
+        <Footer recipeRequest={this.state.recipeRequest} />           
       </ThemeProvider>
     );
   }

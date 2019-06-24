@@ -6,6 +6,9 @@ import { faReact, faNodeJs, faAws, faJs, faGithub, faCss3} from '@fortawesome/fr
 const useStyles = makeStyles(theme => ({
     footer: {
         backgroundColor: '#B0BEC5',
+    },
+    tallerMargin: {
+        backgroundColor: '#B0BEC5',
         marginTop: '20rem'
     },
     wrapper: {
@@ -30,7 +33,9 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function Footer() {
+export default function Footer(props) {
+    // console.log('footerState', props.recipeRequest);
+    const { recipeRequest } = props;
     const techIcons = [
         {tech: 'JavaScript', icon: faJs},
         {tech:'React', icon: faReact},
@@ -42,7 +47,7 @@ export default function Footer() {
     const classes = useStyles();
 
     return (
-        <div className={classes.footer}>
+        <div className={(recipeRequest) ? (classes.tallerMargin) : (classes.footer)}>
             <div className={classes.wrapper}>
                 <Grid container
 
