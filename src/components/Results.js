@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
     resultsContainer: {
         height: 'auto',
         marginTop: '2rem',
-        marginBottom: '20rem',
+        // marginBottom: 'em',
         position: 'relative'
     },
     results: {
@@ -100,37 +100,39 @@ const useStyles = makeStyles(theme => ({
     },
     chip: {
         marginRight: '0.5rem'
+    },
+    hiddenResults: {
+        display: 'none'
     }
 }));
 
 export default function Results(props) {
-    const { recipes, resultStep, filteredRecipes, recipeRequest, newSearch } = props.state;
-    // console.log('newSearch', newSearch.ingredients)
+    const { resultStep, filteredRecipes, recipeRequest, newSearch } = props.state;
     let steps;
     if (filteredRecipes.length % 3 === 0) {
-        steps = Math.floor(filteredRecipes.length / 3) -1 
+        steps = Math.floor(filteredRecipes.length / 3) - 1
     } else {
         steps = Math.floor(filteredRecipes.length / 3)
     }
 
     const theme = createMuiTheme({
         palette: {
-          primary: teal,
-          secondary: orange
+            primary: teal,
+            secondary: orange
         },
-      });
+    });
+
     const classes = useStyles();
     const handleClick = () => {
-        document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth'})
+        document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth' })
     }
-    const results = (filteredRecipes.length > 0) ? (filteredRecipes.map((recipe, index) => {
+    const results = filteredRecipes.map((recipe, index) => {
         return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
-    })) : ([0,1,2].map(el => {
-        return <BlankRecipeCard />
-    }))
+    });
+   
     return (
         <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>
-            
+
             <h1 className={classes.heading} id="results">Results</h1>
             <h4 className={classes.results}>You have {filteredRecipes.length} results</h4>
             <div className={classes.tagContainer}>
@@ -140,15 +142,15 @@ export default function Results(props) {
                 {newSearch.seasons.map(season => {
                     return (<Chip color="primary" className={classes.chip} label={season} />)
                 })}
-                
-                    <Chip color="secondary" className={classes.chip} label={newSearch.dietary} />
-               
+
+                <Chip color="secondary" className={classes.chip} label={newSearch.dietary} />
+
                 <Chip label="Refine Search" variant="outlined" onClick={handleClick} className={classes.refineSearch} icon={<ArrowUpwardIcon />} />
             </div>
 
-            <div className={classes.resultsContainer}>
-            <div className={classes.overlay}>
-                
+            <div className={(filteredRecipes.length === 0) ? (classes.hiddenResults) : (classes.resultsContainer)}>
+                <div className={classes.overlay}>
+
                 </div>
                 <Fab size="small" aria-label="Add" disabled={(resultStep === 1) ? (true) : (false)} onClick={() => { props.navResult('left') }} className={(resultStep === 1) ? (classes.chevronHidden) : (classes.chevronLeft)}>
                     <ChevronLeftIcon />
@@ -157,9 +159,9 @@ export default function Results(props) {
                     <ChevronRightIcon />
                 </Fab>
                 <Paper className={classes.mainPaper}>
-                    
+
                     <div className={classes.recipeResults}>
-                        
+
                         {
                             results
                         }

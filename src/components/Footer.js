@@ -1,11 +1,12 @@
 import React from 'react'
-import { makeStyles, Grid, Button, IconButton } from '@material-ui/core'
+import { makeStyles, Grid, Button } from '@material-ui/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faReact, faNodeJs, faAws, faJs, faGithub, faCss3} from '@fortawesome/free-brands-svg-icons/'
 
 const useStyles = makeStyles(theme => ({
     footer: {
-        backgroundColor: '#B0BEC5'
+        backgroundColor: '#B0BEC5',
+        marginTop: '20rem'
     },
     wrapper: {
         width: '60%',
@@ -15,7 +16,6 @@ const useStyles = makeStyles(theme => ({
     footerHeading: {
         fontFamily: theme.headings.fontFamily,
         fontSize: '2rem',
-        // color: 'white',
         textAlign: 'center'
     },
     footerText: {

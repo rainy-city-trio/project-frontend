@@ -45,7 +45,7 @@ class App extends Component {
   findRecipe = (newSearch) => {
     axios.post('https://6q4rpz2qb6.execute-api.eu-west-2.amazonaws.com/dev/recipe', newSearch)
   .then(res => {
-    // console.log(res.data)
+    console.log(res.data)
     // console.log(newSearch.ingredients.length)
     let data = res.data;
     let filteredRecipes = checkIngredientMatch(data);

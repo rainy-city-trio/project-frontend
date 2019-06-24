@@ -7,12 +7,10 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red, teal } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CardActionArea, Button } from '@material-ui/core';
-import { capitalizeWords } from './../helpers'
-import { faSnowflake, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons'
-import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons'
+import { faSnowflake } from '@fortawesome/free-solid-svg-icons'
 
 const useStyles = makeStyles(theme => ({
     card: {
