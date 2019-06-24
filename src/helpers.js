@@ -13,7 +13,7 @@ const checkIngredientMatch = (recipes) => {
 }
 
 const sortRecipesByMatch = (recipes) => {
-  let sorted = recipes.sort(function(a,b) {return (b.ingredientMatch - a.ingredientMatch)})
+  let sorted = recipes.sort(function (a, b) { return (b.ingredientMatch - a.ingredientMatch) })
   return sorted
 }
 
@@ -25,8 +25,13 @@ const calcPercentage = (ingredientMatch, ingredientsLength) => {
 const ingredientsMatched = (ingredients, recipeIngredients) => {
   // ingredients = ['xxx', 'xxx']
   // recipeIngredients = [{ingredient: 'xxxx', qty: 'xxxx'}, {ingredient: 'xxxx', qty: 'xxxx'}]
-  const matched = recipeIngredients.filter(elem => {
-    return (ingredients.includes(elem.ingredient))
+  let matched = [];
+  recipeIngredients.forEach(ing => {
+    ingredients.forEach(elem => {
+      if (ing.ingredient.includes(elem)) {
+        matched.push(ing)
+      }
+    })
   })
   return matched
 }
@@ -36,11 +41,11 @@ const renderMatches = (matched) => {
   matched.forEach(elem => {
     ingArray.push(elem.ingredient)
   })
-//   ingArray.splice(ingArray.length-1, 0, 'and');
+  //   ingArray.splice(ingArray.length-1, 0, 'and');
   let string = ' ' + ingArray.join(', ') + '';
-  let lastElement = ingArray[ingArray.length-2] + ", " + ingArray[ingArray.length-1];
-  let newElement = ingArray[ingArray.length-2] + " and " + ingArray[ingArray.length-1];
-//   console.log(lastElement, newElement);
+  let lastElement = ingArray[ingArray.length - 2] + ", " + ingArray[ingArray.length - 1];
+  let newElement = ingArray[ingArray.length - 2] + " and " + ingArray[ingArray.length - 1];
+  //   console.log(lastElement, newElement);
   string = string.replace(lastElement, newElement)
   return string
 }
@@ -56,7 +61,7 @@ const renderMatches = (matched) => {
 //     })
 //   })
 //   filtered = filtI;
-  
+
 //   if (seasons.length > 0) {
 //     let filtS = []
 //     filtered.forEach((recipe, index, array) => {
@@ -69,7 +74,7 @@ const renderMatches = (matched) => {
 //     })
 //     filtered = filtS;
 //   }
-  
+
 //   if (special.length > 0) {
 //     let filtSp = [];
 //     filtered.forEach((recipe, index, array) => {

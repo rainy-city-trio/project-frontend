@@ -173,7 +173,7 @@ const SearchWindow = (props) => {
                 </Fade>)
     })
     return (
-        <div className={`mainSearch ${classes.searchWindow} ${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary.length === 0) ? ('') : ('bigWindow')}`}>
+        <div className={`mainSearch ${classes.searchWindow} ${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary === 'none') ? ('') : ('bigWindow')}`}>
             <div className={classes.steppersContainer}>
                 <div className={classes.stepper}>
                     <Paper className={classes.root}>
@@ -249,7 +249,7 @@ const SearchWindow = (props) => {
                     {(stepCount === 1) ? ('FIND YOUR RECIPE') : ('NEXT')}
                 </Button>
             </div>
-            <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary.length === 0) ? (classes.hiddenSearch) : ('')}`}>
+            <section className={`${(newSearch.ingredients.length === 0 && newSearch.seasons.length === 0 && newSearch.dietary === 'none') ? (classes.hiddenSearch) : ('')}`}>
                 <Divider className={classes.divider} variant="middle" />
                 
                 <section className={`${(newSearch.ingredients.length === 0) ? (classes.hiddenSearch) : ('')}`}>

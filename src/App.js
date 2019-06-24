@@ -32,8 +32,8 @@ class App extends Component {
     popularItems: ['eggs', 'chicken', 'beef mince', 'lettuce', 'tomatoes', 'onions', 'milk', 'coffee', 'flour', 'spinach', 'cheddar cheese', 'bread', 'lemon', 'beans', 'bell peppers'],
     filteredRecipes: [],
     newSearch: {
-      ingredients: ['cinnamon', 'garlic cloves', 'butternut squash'],
-      dietary: 'vegetarian',
+      ingredients: [],
+      dietary: 'none',
       seasons: []
     },
     stepCount: 0,
