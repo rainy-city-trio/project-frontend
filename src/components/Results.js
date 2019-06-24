@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     },
     heading: {
         fontFamily: theme.headings.fontFamily,
-        marginTop: '3rem',
+        marginTop: '7rem',
         marginBottom: '.3rem',
         fontSize: '4rem',
         textTransform: 'capitalize',
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         color: '#272D2D'
     },
     mainPaper: {
-        width: '87rem',
+        width: '80vw',
         margin: '0 auto',
         paddingTop: '4rem',
         paddingBottom: '4rem',
@@ -50,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     },
     recipeResults: {
         width: '10000000px',
-        paddingLeft: '4.5rem',
+        marginLeft: '4.5vw',
         display: 'flex'
         // height: '21rem'
     },
@@ -59,7 +59,7 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         top: '50%',
         // transform: 'translateY(-50%)',
-        left: '12vw',
+        left: '9vw',
         zIndex: '99999'
     },
     chevronHidden: {
@@ -67,7 +67,7 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         top: '50%',
         // transform: 'translateY(-50%)',
-        left: '12vw',
+        left: '9vw',
         zIndex: '99999',
         opacity: 0
     },
@@ -76,7 +76,7 @@ const useStyles = makeStyles(theme => ({
         position: 'absolute',
         top: '50%',
         // transform: 'translateY(-50%)',
-        right: '12vw',
+        right: '9vw',
         zIndex: '99999'
     },
     resultsContainer: {
@@ -127,7 +127,7 @@ export default function Results(props) {
     const handleClick = () => {
         document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth' })
     }
-    console.log('filtered before map', filteredRecipes)
+    // console.log('filtered before map', filteredRecipes)
     const results = filteredRecipes.map((recipe, index) => {
         return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
     });

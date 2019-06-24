@@ -25,10 +25,10 @@ const useStyles = makeStyles(theme => ({
         transition: 'all .3s linear'
     },
     card: {
-        maxWidth: 365,
-        width: 365,
+        maxWidth: '20vw',
+        width: '20vw',
         display: 'inline-block',
-        marginRight: '4.5rem',
+        marginRight: '4.5vw',
         boxShadow: '0px 0px 4px rgba(0,0,0,.7)',
         transition: 'all .3s linear',
         '&:hover': {

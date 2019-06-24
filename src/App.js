@@ -80,10 +80,10 @@ class App extends Component {
     let resultsMargin = this.state.resultsMargin;
     let resultStep = this.state.resultStep;
     if (e === 'left') {
-      resultsMargin += 71;
+      resultsMargin += 73.5;
       resultStep -= 1;
     } else if (e === 'right') {
-      resultsMargin -= 71;
+      resultsMargin -= 73.5;
       resultStep += 1;
     }
     firstResult.style.cssText = `margin-left: ${resultsMargin}vw`;

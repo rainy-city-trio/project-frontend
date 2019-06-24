@@ -22,7 +22,10 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center'
     },
     footerText: {
-        width: '70%'
+        width: '70%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+          },
     },
     icon: {
         margin: '.4rem'
