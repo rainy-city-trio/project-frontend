@@ -2,6 +2,7 @@ import React from 'react'
 import { AppBar, Toolbar, Typography, Button } from '@material-ui/core/'
 import MenuItem from './MenuItem';
 import { makeStyles } from '@material-ui/core/styles'
+import './NavBar.css'
 
 const MenuItems = ['Recipes', 'Pantry', 'Meal Planner', 'Shopping List'];
 const useStyles = makeStyles(theme => ({
