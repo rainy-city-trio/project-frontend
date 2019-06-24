@@ -51,7 +51,7 @@ class App extends Component {
     let filteredRecipes = checkIngredientMatch(data);
     filteredRecipes = filterSeason(filteredRecipes, newSearch.seasons);
     filteredRecipes = sortRecipesByMatch(filteredRecipes);
-    // console.log(filteredRecipes);
+    console.log('filteredRecipes', filteredRecipes);
     this.setState({
       filteredRecipes
     })

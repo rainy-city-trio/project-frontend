@@ -40,13 +40,11 @@ const NavBar = () => {
             <Button color="white" className={classes.logo}>
               Zest
             </Button>
-            <div className={classes.containerNavBar} id="containerNavBar">
             {
               MenuItems.map((item, index) => {
                 return <MenuItem item={item} key={index} />
               })
             }
-            </div>
           </Typography>
 
           <Button variant="outlined" className={classes.loginBtn}>LOGIN</Button>

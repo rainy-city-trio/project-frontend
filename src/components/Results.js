@@ -127,6 +127,7 @@ export default function Results(props) {
     const handleClick = () => {
         document.querySelector('#navbar').scrollIntoView({ behavior: 'smooth' })
     }
+    console.log('filtered before map', filteredRecipes)
     const results = filteredRecipes.map((recipe, index) => {
         return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
     });

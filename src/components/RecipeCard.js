@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         width: '80%'
     },
+    transition: {
+        transition: 'all .3s linear'
+    },
     card: {
         maxWidth: 365,
         width: 365,
@@ -98,12 +101,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function RecipeCard(props) {
-    console.log('recipecard', props)
+    // console.log('recipecard', props)
     const { recipe, newSearch } = props;
     const classes = useStyles();
 
     const matched = ingredientsMatched(newSearch.ingredients, recipe.ingredients);
-    console.log('matched', matched)
+    // console.log('matched', matched)
     const chooseIcon = (season) => {
         switch (season) {
             case 'Winter':
@@ -167,6 +170,7 @@ export default function RecipeCard(props) {
             padding: '1rem',
             backgroundImage: `url(${recipe.picture})`,
             backgroundSize: 'cover',
+            backgroundPosition: 'center',
             height: '30vh'
         },
         ingredientList: {
@@ -224,8 +228,8 @@ export default function RecipeCard(props) {
         </Dialog>
     ));
     return (
-        <div>
-            <Card className={`recipeCard ${classes.card}`} onClick={handleClickOpen}>
+        <div className={`recipeCard ${classes.transition}`}>
+            <Card className={`${classes.card}`} onClick={handleClickOpen}>
                 <CardActionArea>
                     <CardMedia
                         className={classes.media}
