@@ -5,7 +5,9 @@ import RecipeCard from './RecipeCard';
 import BlankRecipeCard from './BlankRecipeCard'
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeftOutlined";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightOutlined";
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpwardOutlined'
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import MediaQuery from 'react-responsive';
+
 
 const useStyles = makeStyles(theme => ({
     overlay: {
