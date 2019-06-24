@@ -26,14 +26,6 @@ const useStyles = makeStyles(theme => ({
   loginBtn: {
     color: 'white',
     borderColor: 'white'
-  },
-  '@media screen and (max-width: 425px)': {
-    menuItems: {
-    textAlign: 'left'
-    },
-    containerNavBar: {
-      flexDirection: 'column',
-    }
   }
 }));
 
@@ -44,24 +36,21 @@ const NavBar = () => {
       <AppBar color="primary" className={classes.appBar} position="static">
         <Toolbar>
           <Typography variant="title" color="inherit" className={classes.menuItems}>
-            
-                <Button color="white" className={classes.logo}>
-                  Zest
+
+            <Button color="white" className={classes.logo}>
+              Zest
             </Button>
-                {
-                  MenuItems.map((item, index) => {
-                    return <MenuItem item={item} key={index} />
-                  })
-                }
-              
-              </Typography>
-             
-                <Button variant="outlined" className={classes.loginBtn}>LOGIN</Button>
+            <div className={classes.containerNavBar} id="containerNavBar">
+            {
+              MenuItems.map((item, index) => {
+                return <MenuItem item={item} key={index} />
+              })
+            }
+            </div>
+          </Typography>
 
-              
-            
+          <Button variant="outlined" className={classes.loginBtn}>LOGIN</Button>
 
-          
         </Toolbar>
       </AppBar>
     </div>
