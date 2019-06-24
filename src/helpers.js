@@ -18,6 +18,8 @@ const sortRecipesByMatch = (recipes) => {
 }
 
 const calcPercentage = (ingredientMatch, ingredientsLength) => {
+  console.log('ingredientMatch', ingredientMatch);
+  console.log('ingredientsLength', ingredientsLength);
   const percentage = (ingredientMatch / ingredientsLength) * 100;
   return parseInt(percentage)
 }
@@ -41,53 +43,29 @@ const renderMatches = (matched) => {
   matched.forEach(elem => {
     ingArray.push(elem.ingredient)
   })
-  //   ingArray.splice(ingArray.length-1, 0, 'and');
   let string = ' ' + ingArray.join(', ') + '';
   let lastElement = ingArray[ingArray.length - 2] + ", " + ingArray[ingArray.length - 1];
   let newElement = ingArray[ingArray.length - 2] + " and " + ingArray[ingArray.length - 1];
-  //   console.log(lastElement, newElement);
   string = string.replace(lastElement, newElement)
   return string
 }
 
-// const filterRecipes = (recipes, ingredients, seasons, special) => {
-//   let filtered = [];
-//   let filtI = [];
-//   recipes.forEach((recipe, index, array) => {
-//     ingredients.forEach(search => {
-//       if (recipe.ingredients.indexOf(search) !== -1) {
-//         filtI.push(recipe)
-//       }
-//     })
-//   })
-//   filtered = filtI;
+const filterSeason = (recipes, seasons) => {
+  let filtered = [];
+  if (seasons.length === 0) {
+    return recipes;
+  } else {
+    recipes.forEach(recipe => {
+      seasons.forEach(season => {
+        if (recipe.seasonName.toLowerCase() === season.toLowerCase()) {
+          filtered.push(recipe)
+        }
+      })
+    })
+    return filtered;
+  }
+}
 
-//   if (seasons.length > 0) {
-//     let filtS = []
-//     filtered.forEach((recipe, index, array) => {
-//       seasons.forEach(season => {
-//         console.log(season)
-//         if (recipe.season.toLowerCase() === season.toLowerCase()) {
-//           filtS.push(recipe)
-//         }
-//       })
-//     })
-//     filtered = filtS;
-//   }
-
-//   if (special.length > 0) {
-//     let filtSp = [];
-//     filtered.forEach((recipe, index, array) => {
-//       special.forEach(elem => {
-//         if (recipe.special.toLowerCase() === elem.toLowerCase()) {
-//           filtSp.push(recipe)
-//         }
-//       })
-//     })
-//     filtered = filtSp;
-//   }
-//   return filtered;
-// }
 
 module.exports = {
   capitalizeWords,
@@ -95,5 +73,6 @@ module.exports = {
   sortRecipesByMatch,
   calcPercentage,
   ingredientsMatched,
-  renderMatches
+  renderMatches,
+  filterSeason
 }

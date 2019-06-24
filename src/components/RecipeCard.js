@@ -1,5 +1,5 @@
 import React from 'react';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red, teal } from '@material-ui/core/colors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CardActionArea, Button } from '@material-ui/core';
+import { CardActionArea, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Paper, Grid } from '@material-ui/core';
 import { capitalizeWords } from './../helpers'
 import { faSnowflake, faSeedling, faSun } from '@fortawesome/free-solid-svg-icons'
 import { faCanadianMapleLeaf } from '@fortawesome/free-brands-svg-icons'
@@ -89,7 +89,12 @@ const useStyles = makeStyles(theme => ({
     },
     matchedIngredients: {
         fontWeight: 'bold'
-        }
+    },
+
+    
+    cover: {
+
+    }
 }));
 
 export default function RecipeCard(props) {
@@ -132,42 +137,130 @@ export default function RecipeCard(props) {
                 return '';
         }
     }
+
+    const [open, setOpen] = React.useState(false);
+
+    function handleClickOpen() {
+        setOpen(true);
+    }
+
+    function handleClose() {
+        setOpen(false);
+    }
+    const dialogStyles = {
+        dialog: {
+
+            // backgroundImage: `url(${recipe.picture})`,
+            // backgroundSize: 'cover',
+        },
+        root: {
+            flexGrow: 1,
+            display: 'flex'
+            // backgroundColor: 'red'
+        },
+        paper: {
+            padding: '1rem',
+            textAlign: 'center',
+            color: theme.palette.text.secondary,
+        },
+        paperImg: {
+            padding: '1rem',
+            backgroundImage: `url(${recipe.picture})`,
+            backgroundSize: 'cover',
+            height: '30vh'
+        },
+        ingredientList: {
+            listStyleType: 'none'
+        }
+    };
+
+    const DialogWithStyles = withStyles(dialogStyles)(({ classes }) => (
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            maxWidth="md"
+            classes={{ paper: classes.dialog }}
+        >
+            <DialogTitle id="alert-dialog-title">{recipe.name}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    <div className={classes.root}>
+                        <Grid   container 
+                                alignItems="center"
+                                justify="center"
+                                spacing={3}>
+                            <Grid item xs={6}>
+                                <Paper className={classes.paperImg}></Paper>
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Paper className={classes.paper}> <h3>Ingredients:</h3>
+                    <ul className={classes.ingredientList}>
+                        {recipe.ingredients.map(ing => {
+                            return (<li>{ing.qty} {ing.ingredient}</li>)
+                        })}
+                    </ul></Paper>
+                            </Grid>
+                        </Grid>
+                    </div>
+
+                    
+                   
+                    <h3>Method:</h3>
+                    <ol>
+                        {recipe.method.split(". ").map(elem => {
+                            return (<li>{elem}</li>)
+                        })}
+                    </ol>
+
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleClose} color="primary" autoFocus>
+                    Close
+          </Button>
+            </DialogActions>
+        </Dialog>
+    ));
     return (
-        <Card className={`recipeCard ${classes.card}`}>
-            <CardActionArea>
-                <CardMedia
-                    className={classes.media}
-                    image={recipe.picture}
-                    title={recipe.name}
-                />
-                <div className={classes.percentage}>
-                    <Button size="small" variant="contained" color="primary">{calcPercentage(recipe.ingredientMatch, newSearch.ingredients.length)}% Match</Button>
+        <div>
+            <Card className={`recipeCard ${classes.card}`} onClick={handleClickOpen}>
+                <CardActionArea>
+                    <CardMedia
+                        className={classes.media}
+                        image={recipe.picture}
+                        title={recipe.name}
+                    />
+                    <div className={classes.percentage}>
+                        <Button size="small" variant="contained" color="primary">{calcPercentage(recipe.ingredientMatch, newSearch.ingredients.length)}% Match</Button>
 
-                </div>
-            </CardActionArea>
-            <div className={classes.recipeDescription}>
-                <CardContent>
-                    <Typography className={classes.recipeTitle} variant="h5" component="h1">
-                        {capitalizeWords(recipe.name)}
-                    </Typography>
-                </CardContent>
-                <Typography variant="subtitle1" className={classes.matches}>
-                    This recipe includes
+                    </div>
+                </CardActionArea>
+                <div className={classes.recipeDescription}>
+                    <CardContent>
+                        <Typography className={classes.recipeTitle} variant="h5" component="h1">
+                            {capitalizeWords(recipe.name)}
+                        </Typography>
+                    </CardContent>
+                    <Typography variant="subtitle1" className={classes.matches}>
+                        This recipe includes
                     <span className={classes.matchedIngredients}>
-                        {
-                            renderMatches(matched)
-                        }
-                    </span>
+                            {renderMatches(matched)}
+                        </span>
 
-                </Typography>
-                <CardActions className={classes.cardActions} disableSpacing>
+                    </Typography>
+                    <CardActions className={classes.cardActions} disableSpacing>
 
-                    {chooseIcon(recipe.seasonName)}
-                    <ThemeProvider theme={theme}>
-                        {chooseReqs(recipe.dietaryId)}
-                    </ThemeProvider>
-                </CardActions>
-            </div>
-        </Card>
+                        {chooseIcon(recipe.seasonName)}
+                        <ThemeProvider theme={theme}>
+                            {chooseReqs(recipe.dietaryId)}
+                        </ThemeProvider>
+                    </CardActions>
+                </div>
+            </Card>
+            <DialogWithStyles />
+        </div>
+
     );
 }

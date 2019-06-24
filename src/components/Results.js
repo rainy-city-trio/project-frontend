@@ -1,12 +1,12 @@
 import React from 'react'
-import { makeStyles, Paper, Fab, Chip, createMuiTheme } from '@material-ui/core'
+import { withStyles, Button, Dialog, MuiDialogTitle, MuiDialogContent, MuiDialogActions, IconButton, Typography,makeStyles, Paper, Fab, Chip, createMuiTheme } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close'
 import { teal, orange } from '@material-ui/core/colors/'
 import RecipeCard from './RecipeCard';
-import BlankRecipeCard from './BlankRecipeCard'
+// import BlankRecipeCard from './BlankRecipeCard'
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeftOutlined";
 import ChevronRightIcon from "@material-ui/icons/ChevronRightOutlined";
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpwardOutlined';
-
 
 const useStyles = makeStyles(theme => ({
     overlay: {
@@ -130,6 +130,17 @@ export default function Results(props) {
     const results = filteredRecipes.map((recipe, index) => {
         return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
     });
+
+    const [open, setOpen] = React.useState(false);
+
+  function handleClickOpen() {
+    setOpen(true);
+  }
+
+  function handleClose() {
+    setOpen(false);
+  }
+
    
     return (
         <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>

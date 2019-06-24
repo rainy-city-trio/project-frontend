@@ -7,7 +7,7 @@ import { blue } from '@material-ui/core/colors';
 import NavBar from './components/NavBar';
 import Billboard from './components/Billboard';
 import Results from './components/Results';
-import { checkIngredientMatch, sortRecipesByMatch } from './helpers'
+import { checkIngredientMatch, sortRecipesByMatch, filterSeason } from './helpers'
 import Footer from './components/Footer';
 import axios from 'axios';
 // import SearchWindow from './components/SearchWindow';
@@ -70,6 +70,7 @@ class App extends Component {
     // console.log(newSearch.ingredients.length)
     let data = res.data;
     let filteredRecipes = checkIngredientMatch(data);
+    filteredRecipes = filterSeason(filteredRecipes, newSearch.seasons);
     filteredRecipes = sortRecipesByMatch(filteredRecipes);
     // console.log(filteredRecipes);
     this.setState({
