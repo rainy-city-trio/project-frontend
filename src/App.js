@@ -11,7 +11,6 @@ import { checkIngredientMatch, sortRecipesByMatch } from './helpers'
 import Footer from './components/Footer';
 import axios from 'axios';
 // import SearchWindow from './components/SearchWindow';
-import MediaQuery from 'react-responsive';
 
 const theme = createMuiTheme({
   palette: {
