@@ -21,20 +21,49 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <style type="text/css">
+ 
+      #share-buttons img {
+      width: 35px;
+      padding: 5px;
+      border: 0;
+      box-shadow: 0;
+      display: inline;
+      }
+       
+      </style>
     <title>React App</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <div id="share-buttons">
+      
+      <!-- Email -->
+      <a href="mailto:?Subject=Zest Recipe Builder&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 https://simplesharebuttons.com">
+          <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+      </a>
+   
+      <!-- Facebook -->
+      <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+      </a>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      <!-- Print -->
+      <a href="javascript:;" onclick="window.print()">
+          <img src="https://simplesharebuttons.com/images/somacro/print.png" alt="Print" />
+      </a>
+      
+      <!-- Reddit -->
+      <a href="http://reddit.com/submit?url=https://simplesharebuttons.com&amp;title=Zest Recipe Builder" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+      </a>
+       
+      <!-- Twitter -->
+      <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Zest%20Recipe%20Builder&amp;hashtags=zestrecipebuilder" target="_blank">
+          <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+      </a>
+  
+    </div>
   </body>
 </html>
