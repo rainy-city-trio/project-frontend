@@ -2,6 +2,7 @@
   "name": "project-frontend",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/rainy-city-trio/project-frontend",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.19",
     "@fortawesome/free-brands-svg-icons": "^5.9.0",
@@ -40,6 +41,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   },
   "homepage": "https://github.com/rainy-city-trio/project-frontend"
 }
+=======
+  }
+}
+>>>>>>> 55210a1c7533176a2c2e7a474583c0ba3101337f
