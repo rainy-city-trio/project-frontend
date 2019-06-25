@@ -48,8 +48,13 @@ const useStyles = makeStyles(theme => ({
             left: '45%',
             padding: '4%',
             top: '11rem',
-            
           },
+          [theme.breakpoints.down('sm')]: {
+            width: '75vw',
+            left: '10%',
+            top: '10rem',
+            padding:'4.2%',
+          }
     },
     textField: {
     },
@@ -93,7 +98,11 @@ const useStyles = makeStyles(theme => ({
     stepper: {
         width: '40vw',
         marginRight: '5vw',
-        transition: 'all .4s'
+        transition: 'all .4s',
+        [theme.breakpoints.down('sm')]: {
+            width: '75vw',
+            padding: '.2rem'
+        }
     },
     group: {
         display: 'inline',

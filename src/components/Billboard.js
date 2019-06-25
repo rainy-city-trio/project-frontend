@@ -19,6 +19,10 @@ const useStyles = makeStyles(theme => ({
       width: '120%',
       marginLeft: '-8vw'
     },
+    [theme.breakpoints.down('sm')]: {
+      width: '220%',
+      marginTop: '0rem'
+    }
   },
   overlay: {
     // backgroundColor: 'black',

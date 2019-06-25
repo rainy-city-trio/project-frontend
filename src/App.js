@@ -153,7 +153,13 @@ class App extends Component {
     } else {
       let stepper = document.querySelector('.mainSearch > div > div');
       let stepCount = this.state.stepCount + 1;
-      let margin = this.state.margin - 45;
+      let margin;
+      if (window.innerWidth <= 960) {
+        margin = this.state.margin - 81.5;
+      } else {
+        margin = this.state.margin - 45;
+      }
+      // console.log(margin, window.innerWidth)
       this.setState({
         stepCount,
         margin
@@ -166,7 +172,13 @@ class App extends Component {
     let stepper = document.querySelector('.mainSearch > div > div');
     
     let stepCount = this.state.stepCount - 1;
-    let margin = this.state.margin + 45;
+    let margin;
+      if (window.innerWidth <= 960) {
+        margin = this.state.margin + 81.5;
+      } else {
+        margin = this.state.margin + 45;
+      }
+
     stepper.style.cssText = `margin-left: ${margin}vw`;
     this.setState({
       stepCount,

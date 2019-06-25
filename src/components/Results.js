@@ -57,7 +57,10 @@ const useStyles = makeStyles(theme => ({
     recipeResults: {
         width: '10000000px',
         marginLeft: '4.5vw',
-        display: 'flex'
+        display: 'flex',
+        [theme.breakpoints.down('sm')]: {
+            display: 'block'
+        }
         // height: '21rem'
     },
     chevronLeft: {
@@ -137,7 +140,7 @@ export default function Results(props) {
     const results = filteredRecipes.map((recipe, index) => {
         return <RecipeCard key={index} newSearch={newSearch} recipe={recipe} />
     });
-
+console.log(theme)
    
     return (
         <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>

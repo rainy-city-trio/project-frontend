@@ -39,7 +39,11 @@ const useStyles = makeStyles(theme => ({
             marginRight: '3vw',
             maxWidth: '21.5vw',
             width: '21.5vw',
-
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '70.5vw',
+            maxWidth: '70.5vw',
+            marginBottom: '1rem'
         }
     },
     media: {
@@ -83,6 +87,9 @@ const useStyles = makeStyles(theme => ({
         margin: '2.5rem 0rem',
         [theme.breakpoints.down('md')]: {
             height: '40vh'
+        },
+        [theme.breakpoints.down('sm')]: {
+            height: '20vh'
         }
         // alignItems: 'flex-end',
         

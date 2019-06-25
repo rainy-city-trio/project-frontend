@@ -52,3 +52,9 @@ code {
   background: #007bb5;
   color: white;
 }
+
+@media only screen and (max-width: 960px) {
+  .icon-bar {
+    display: none
+  }
+}
