@@ -33,6 +33,12 @@ code {
   background-color: #000;
 }
 
+@media screen and (max-height: 490px) {
+  .icon-bar {
+    position: bottom;
+  }
+}
+
 .facebook {
   background: #3B5998;
   color: white;
