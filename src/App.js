@@ -24,7 +24,15 @@ const theme = createMuiTheme({
   },
   headings: {
     fontFamily: 'Abril Fatface'
-  }
+  },
+    overrides: {
+        MuiFormControlLabel: {
+            label: {
+                fontSize: '100%',
+            }
+        }
+    
+}
 });
 
 class App extends Component {
@@ -62,7 +70,7 @@ class App extends Component {
     this.setState({recipeRequest: true})
     setTimeout(() => {
       document.querySelector('#results').scrollIntoView({block: 'start', behavior: 'smooth'})
-    }, 300)
+    }, 400)
     // let recipes = [...this.state.recipes];
     let ingredients = [...this.state.newSearch.ingredients];
     // let special = this.state.newSearch.dietary;

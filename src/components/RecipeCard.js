@@ -34,6 +34,12 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             transition: 'all .3s linear',
             boxShadow: '0px 0px 10px rgba(0,0,0,.3)'
+        },
+        [theme.breakpoints.down('md')]: {
+            marginRight: '3vw',
+            maxWidth: '21.5vw',
+            width: '21.5vw',
+
         }
     },
     media: {
@@ -60,7 +66,10 @@ const useStyles = makeStyles(theme => ({
         marginRight: '.2rem',
     },
     cardActions: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        [theme.breakpoints.down('md')]: {
+            flexDirection: 'column'
+        }
     },
     center: {
         textAlign: 'center'
@@ -71,15 +80,22 @@ const useStyles = makeStyles(theme => ({
         height: '230px',
         alignItems: 'center',
         justifyContent: 'center',
-        margin: '2.5rem 0rem'
-        // alignItems: 'flex-end'
+        margin: '2.5rem 0rem',
+        [theme.breakpoints.down('md')]: {
+            height: '40vh'
+        }
+        // alignItems: 'flex-end',
+        
     },
     recipeTitle: {
         width: '70%',
         fontWeight: 'bold',
         textAlign: 'center',
         margin: '0 auto',
-        padding: '.3rem 0'
+        padding: '.3rem 0',
+        [theme.breakpoints.down('md')]: {
+            fontSize: '1.3rem'
+        }
     },
     percentage: {
         // width: '100px',
@@ -97,6 +113,12 @@ const useStyles = makeStyles(theme => ({
     
     cover: {
 
+    },
+    buttonCard: {
+
+        [theme.breakpoints.down('md')]: {
+            // padding: '.3rem'
+        }
     }
 }));
 
@@ -110,13 +132,13 @@ export default function RecipeCard(props) {
     const chooseIcon = (season) => {
         switch (season) {
             case 'Winter':
-                return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSnowflake} />{season}</Button></IconButton>);
+                return (<IconButton disabled><Button variant="outlined" className={classes.buttonCard}><FontAwesomeIcon className={classes.icon} icon={faSnowflake} />{season}</Button></IconButton>);
             case 'Spring':
-                return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSeedling} />{season}</Button></IconButton>);
+                return (<IconButton disabled><Button variant="outlined" className={classes.buttonCard}><FontAwesomeIcon className={classes.icon} icon={faSeedling} />{season}</Button></IconButton>);
             case 'Summer':
-                return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faSun} />{season}</Button></IconButton>);
+                return (<IconButton disabled><Button variant="outlined" className={classes.buttonCard}><FontAwesomeIcon className={classes.icon} icon={faSun} />{season}</Button></IconButton>);
             case 'Autumn':
-                return (<IconButton disabled><Button variant="outlined"><FontAwesomeIcon className={classes.icon} icon={faCanadianMapleLeaf} />{season}</Button></IconButton>);
+                return (<IconButton disabled><Button variant="outlined" className={classes.buttonCard}><FontAwesomeIcon className={classes.icon} icon={faCanadianMapleLeaf} />{season}</Button></IconButton>);
             default:
                 return '';
         }
@@ -129,11 +151,11 @@ export default function RecipeCard(props) {
     const chooseReqs = (req) => {
         switch (req) {
             case 1:
-                return (<IconButton disabled><Button color="primary" variant="outlined">VEGETARIAN</Button></IconButton>);
+                return (<IconButton disabled><Button color="primary" variant="outlined" className={classes.buttonCard}>VEGETARIAN</Button></IconButton>);
             case 2:
-                return (<IconButton disabled><Button color="primary" variant="outlined">VEGAN</Button></IconButton>);
+                return (<IconButton disabled><Button color="primary" variant="outlined" className={classes.buttonCard}>VEGAN</Button></IconButton>);
             case 3:
-                return (<IconButton disabled><Button color="primary" variant="outlined">GLUTEN-FREE</Button></IconButton>);
+                return (<IconButton disabled><Button color="primary" variant="outlined" className={classes.buttonCard}>GLUTEN-FREE</Button></IconButton>);
             case 4:
                 return '';
             default:

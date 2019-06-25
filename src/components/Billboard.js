@@ -7,9 +7,18 @@ const useStyles = makeStyles(theme => ({
   containerBillboard: {
     position: 'relative',
     zIndex: -1,
+    [theme.breakpoints.down('md')]: {
+      overflow: 'hidden'
+    },
 },
   billBoard: {
-    zIndex: -9999999999
+    zIndex: -9999999999,
+    width: '100%',
+    height: '100%',
+    [theme.breakpoints.down('md')]: {
+      width: '120%',
+      marginLeft: '-8vw'
+    },
   },
   overlay: {
     // backgroundColor: 'black',
@@ -29,7 +38,7 @@ const Billboard = (props) => {
   return (
     <div>
       <div className={classes.containerBillboard}>
-        <img src={billboard} width="100%" height="100%" className={classes.billBoard} alt="" />
+        <img src={billboard} className={classes.billBoard} alt="" />
         <div className={classes.overlay}></div>
         
       </div>

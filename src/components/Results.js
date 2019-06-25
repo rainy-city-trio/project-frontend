@@ -18,11 +18,17 @@ const useStyles = makeStyles(theme => ({
     },
     rootHidden: {
         opacity: 0,
-        position: 'relative'
+        position: 'relative',
+        [theme.breakpoints.down('md')]: {
+            marginTop: '12rem'
+        }
     },
     rootShow: {
         opacity: 1,
-        position: 'relative'
+        position: 'relative',
+        [theme.breakpoints.down('md')]: {
+            marginTop: '20rem'
+        }
     },
     heading: {
         fontFamily: theme.headings.fontFamily,
@@ -135,7 +141,6 @@ export default function Results(props) {
    
     return (
         <div className={(recipeRequest === false) ? (classes.rootHidden) : (classes.rootShow)}>
-
             <h1 className={classes.heading} id="results">Results</h1>
             <h4 className={classes.results}>You have {filteredRecipes.length} results</h4>
             <div className={classes.tagContainer}>

@@ -10,13 +10,14 @@ import Button from '@material-ui/core/Button';
 import { Chip, Divider, FormControl, RadioGroup, FormControlLabel, Switch, Fade } from '@material-ui/core';
 import './SearchWindow.css'
 
+
 const useStyles = makeStyles(theme => ({
     root: {
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
         width: "100%",
-        marginBottom: '2rem'
+        marginBottom: '2rem',
     },
     input: {
         // marginLeft: 8,
@@ -30,23 +31,25 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '2rem'
     },
     searchWindow: {
-        // transition: 'all 2s',
         overflow: 'hidden',
         zIndex: 0,
         backgroundColor: 'white',
-        // opacity: '.6',
         borderRadius: '.2rem',
         position: 'absolute',
         top: '17rem',
         left: '50%',
-        // transform: 'translate(-50%, -50%)',
         width: '40vw',
         height: 'auto',
         padding: '2.2%',
         boxShadow: '0px 0px 10px rgba(0,0,0,.3)',
         marginBottom: 0,
-        transition: 'top .2s linear'
-        // border: '1px solid rgba(0,0,0,.1)'
+        transition: 'top .2s linear',
+        [theme.breakpoints.down('md')]: {
+            left: '45%',
+            padding: '4%',
+            top: '11rem',
+            
+          },
     },
     textField: {
     },
