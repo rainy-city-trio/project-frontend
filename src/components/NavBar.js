@@ -10,7 +10,30 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   menuItems: {
-    flexGrow: 1
+    [theme.breakpoints.down('md')]: {
+      flexGrow: 4,
+      backgroundColor: 'blue',
+      flexFlow: 'column wrap',
+      alignItems: 'left',
+      justifyContent: 'flexStart',
+      flex: '50%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      flexGrow: 4,
+      backgroundColor: 'yellow',
+      flexFlow: 'column wrap',
+      alignItems: 'left',
+      justifyContent: 'flexStart',
+      flex: '25%',
+    },
+    [theme.breakpoints.down('xs')]: {
+      flexGrow: 4,
+      backgroundColor: 'pink',
+      flexFlow: 'column wrap',
+      alignItems: 'left',
+      justifyContent: 'flexStart',
+      flex: '25%'
+    },
   },
   logo: {
     fontFamily: theme.headings.fontFamily,
@@ -19,7 +42,12 @@ const useStyles = makeStyles(theme => ({
   },
   loginBtn: {
     color: 'white',
-    borderColor: 'white'
+    borderColor: 'white',
+    [theme.breakpoints.down('md')]: {
+      alignItems: 'right',
+      justifyContent: 'flexEnd',
+      flex: 'column right'
+    },
   },
   appBar: {
     [theme.breakpoints.down('md')]: {
