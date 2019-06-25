@@ -1,8 +1,0 @@
-@media screen and (max-width: 425px) {
-    .searchWindow {
-       flex-grow: 0;
-       flex-direction: column;
-       align-items: left;
-       width: 100%
-     }
-   }
