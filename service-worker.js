@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/rainy-city-trio/project-frontend/precache-manifest.a1676165825532a741ff57cb95972032.js"
+  "/rainy-city-trio/project-frontend/precache-manifest.2ecfb55c9c504b8dc45e5391afefdaef.js"
 );
 
 self.addEventListener('message', (event) => {
