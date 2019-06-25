@@ -63,6 +63,10 @@ const useStyles = makeStyles(theme => ({
     },
   },
   appBar: {
+      position: 'fixed',
+      top: '0',
+      width: '100%',
+      behavior: 'smooth',
     [theme.breakpoints.down('md')]: {
       backgroundColor: 'blue',
     },
@@ -70,8 +74,7 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'yellow'
     },
     [theme.breakpoints.down('xs')]: {
-      backgroundColor: 'pink',
-      position: 'relative',
+      backgroundColor: 'pink'
     },
   },
 }));
