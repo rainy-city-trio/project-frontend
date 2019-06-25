@@ -32,13 +32,26 @@ const useStyles = makeStyles(theme => ({
       flexFlow: 'column wrap',
       alignItems: 'left',
       justifyContent: 'flexStart',
-      flex: '25%'
+      flex: '25%',
+      float: 'none',
+      // display: 'block',
+      textAlign: 'left',
     },
   },
   logo: {
     fontFamily: theme.headings.fontFamily,
     color: 'white',
-    fontSize: '2.7rem'
+    fontSize: '2.7rem',
+    [theme.breakpoints.down('sm')]: {
+      flexGrow: 4,
+      flexFlow: 'column nowrap',
+      alignItems: 'left',
+      justifyContent: 'flexStart',
+      flex: '25%',
+      // position: 'absolute',
+      left: 0,
+      top: 0,
+    },
   },
   loginBtn: {
     color: 'white',
@@ -58,8 +71,9 @@ const useStyles = makeStyles(theme => ({
     },
     [theme.breakpoints.down('xs')]: {
       backgroundColor: 'pink',
+      position: 'relative',
     },
-  }
+  },
 }));
 
 const NavBar = () => {
