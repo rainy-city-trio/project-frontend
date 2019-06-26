@@ -66,15 +66,15 @@ const useStyles = makeStyles(theme => ({
       // top: '0',
       // width: '100%',
       // behavior: 'smooth',
-    [theme.breakpoints.down('md')]: {
-      backgroundColor: 'blue',
-    },
-    [theme.breakpoints.down('sm')]: {
-      backgroundColor: 'yellow'
-    },
-    [theme.breakpoints.down('xs')]: {
-      backgroundColor: 'pink'
-    },
+    // [theme.breakpoints.down('md')]: {
+    //   backgroundColor: 'blue',
+    // },
+    // [theme.breakpoints.down('sm')]: {
+    //   backgroundColor: 'yellow'
+    // },
+    // [theme.breakpoints.down('xs')]: {
+    //   backgroundColor: 'pink'
+    // },
   },
   menuItemList: {
     display: 'none'
