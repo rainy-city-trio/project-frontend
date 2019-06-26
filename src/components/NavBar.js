@@ -9,6 +9,7 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1
   },
   menuItems: {
+    flexGrow: 1
     // [theme.breakpoints.down('md')]: {
     //   flexGrow: 4,
     //   backgroundColor: 'blue',
@@ -77,8 +78,9 @@ const useStyles = makeStyles(theme => ({
     // },
   },
   menuItemList: {
-    display: 'none'
-  }
+    [theme.breakpoints.down('xs')]: {
+      display: 'none'
+    }  }
 }));
 
 const NavBar = () => {
@@ -92,13 +94,13 @@ const NavBar = () => {
             <Button color="white" className={classes.logo}>
               Zest
             </Button>
-            <div className={classes.menuItemList}>
+            <span className={classes.menuItemList}>
             {
               MenuItems.map((item, index) => {
                 return <MenuItem item={item} key={index} />
               })
             }
-            </div>
+            </span>
             
           </Typography>
 
