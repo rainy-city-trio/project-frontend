@@ -20,7 +20,6 @@ const useStyles = makeStyles(theme => ({
         marginBottom: '2rem',
     },
     input: {
-        // marginLeft: 8,
         flex: 1
     },
     iconButton: {
@@ -64,14 +63,12 @@ const useStyles = makeStyles(theme => ({
         letterSpacing: '.2rem',
         color: '#272D2D',
         margin: '0rem'
-        // marginTop: '2rem'
     },
     secondHeading: {
         textTransform: 'uppercase',
         fontSize: '1rem',
         letterSpacing: '.2rem',
-        color: '#272D2D',
-        // marginTop: '2rem'
+        color: '#272D2D'
     },
     button: {
         textTransform: 'lowercase',
@@ -85,7 +82,6 @@ const useStyles = makeStyles(theme => ({
     nextSubmit: {
         display: 'flex',
         width: '100%',
-        // backgroundColor: 'blue',
         justifyContent: 'space-between'
     },
 
@@ -93,7 +89,6 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         width: '3000px',
         marginLeft: 0,
-        // transition: 'margin-left 2s'
     },
     stepper: {
         width: '40vw',
@@ -125,8 +120,6 @@ const useStyles = makeStyles(theme => ({
     },
     hiddenSearch: {
         maxHeight: '0rem'
-        // opacity: 0,
-        // transition: 'height .3s'
     }
 }));
 

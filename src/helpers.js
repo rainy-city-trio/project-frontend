@@ -18,8 +18,6 @@ const sortRecipesByMatch = (recipes) => {
 }
 
 const calcPercentage = (ingredientMatch, ingredientsLength) => {
-  // console.log('ingredientMatch', ingredientMatch);
-  // console.log('ingredientsLength', ingredientsLength);
   const percentage = (ingredientMatch / ingredientsLength) * 100;
   return parseInt(percentage)
 }

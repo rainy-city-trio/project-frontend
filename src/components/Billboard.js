@@ -37,12 +37,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Billboard = (props) => {
-  // console.log('billboard props', props.state);
   const classes = useStyles();
   return (
     <div>
       <div className={classes.containerBillboard}>
-        <img src={billboard} className={classes.billBoard} alt="" />
+        <img src={billboard} className={classes.billBoard} alt="Zest" />
         <div className={classes.overlay}></div>
         
       </div>

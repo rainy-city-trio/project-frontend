@@ -90,9 +90,7 @@ const useStyles = makeStyles(theme => ({
         },
         [theme.breakpoints.down('sm')]: {
             height: '20vh'
-        }
-        // alignItems: 'flex-end',
-        
+        }      
     },
     recipeTitle: {
         width: '70%',
@@ -105,37 +103,21 @@ const useStyles = makeStyles(theme => ({
         }
     },
     percentage: {
-        // width: '100px',
-        // height: '100px',
         position: 'absolute',
         padding: '.3rem .3rem 0 0',
-        // backgroundColor: 'red',
         top: 0,
         right: 0
     },
     matchedIngredients: {
         fontWeight: 'bold'
-    },
-
-    
-    cover: {
-
-    },
-    buttonCard: {
-
-        [theme.breakpoints.down('md')]: {
-            // padding: '.3rem'
-        }
     }
 }));
 
 export default function RecipeCard(props) {
-    // console.log('recipecard', props)
     const { recipe, newSearch } = props;
     const classes = useStyles();
 
     const matched = ingredientsMatched(newSearch.ingredients, recipe.ingredients);
-    // console.log('matched', matched)
     const chooseIcon = (season) => {
         switch (season) {
             case 'Winter':
@@ -180,15 +162,9 @@ export default function RecipeCard(props) {
         setOpen(false);
     }
     const dialogStyles = {
-        dialog: {
-
-            // backgroundImage: `url(${recipe.picture})`,
-            // backgroundSize: 'cover',
-        },
         root: {
             flexGrow: 1,
             display: 'flex'
-            // backgroundColor: 'red'
         },
         paper: {
             padding: '1rem',
@@ -237,16 +213,12 @@ export default function RecipeCard(props) {
                             </Grid>
                         </Grid>
                     </div>
-
-                    
-                   
                     <h3>Method:</h3>
                     <ol>
                         {recipe.method.split(". ").map(elem => {
                             return (<li>{elem}</li>)
                         })}
                     </ol>
-
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -267,7 +239,6 @@ export default function RecipeCard(props) {
                     />
                     <div className={classes.percentage}>
                         <Button size="small" variant="contained" color="primary">{calcPercentage(recipe.ingredientMatch, newSearch.ingredients.length)}% Match</Button>
-
                     </div>
                 </CardActionArea>
                 <div className={classes.recipeDescription}>
@@ -278,13 +249,11 @@ export default function RecipeCard(props) {
                     </CardContent>
                     <Typography variant="subtitle1" className={classes.matches}>
                         This recipe includes
-                    <span className={classes.matchedIngredients}>
+                        <span className={classes.matchedIngredients}>
                             {renderMatches(matched)}
                         </span>
-
                     </Typography>
                     <CardActions className={classes.cardActions} disableSpacing>
-
                         {chooseIcon(recipe.seasonName)}
                         <ThemeProvider theme={theme}>
                             {chooseReqs(recipe.dietaryId)}

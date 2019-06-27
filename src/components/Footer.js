@@ -37,7 +37,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Footer(props) {
-    // console.log('footerState', props.recipeRequest);
     const { recipeRequest } = props;
     const techIcons = [
         {tech: 'JavaScript', icon: faJs},
@@ -68,7 +67,6 @@ export default function Footer(props) {
                         </p>
                     </Grid>
                     <Grid item xs={6}>
-
                         <div className={classes.footerText}>
                             {
                                 techIcons.map(elem => {
@@ -80,10 +78,7 @@ export default function Footer(props) {
                             }
                         </div>
                     </Grid>
-
                 </Grid>
-
-
             </div>
         </div>
     )
